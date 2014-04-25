@@ -76,6 +76,12 @@
 										<div class="controls">
 											<input type="number" name="biaya" id="biaya" class="input-block-level" min="1" max="999999999999" required>
 										</div>
+									</div>									
+									<div class="control-group">
+										<label for="biaya" class="control-label">No. Rekeing</label>
+										<div class="controls">
+											<input type="number" name="norekeing" id="norekeing" class="input-block-level" min="1" max="9999999999999" required>
+										</div>
 									</div>
 									<div class="control-group">
 										<label for="biaya" class="control-label">DP</label>

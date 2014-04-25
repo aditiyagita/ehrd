@@ -5,7 +5,7 @@ class Pelatihan extends Eloquent {
 	protected $primaryKey = 'idpelatihan';
 	protected $table = 'pelatihan';
 	protected $guarded = array();
-	protected $fillable = array('tanggalmulai', 'tanggalselesai', 'judul', 'uraian', 'biaya', 'dp', 'pelunasan', 'kuota', 'status', 'tempat');
+	protected $fillable = array('tanggalmulai', 'tanggalselesai', 'judul', 'uraian', 'biaya', 'dp', 'pelunasan', 'kuota', 'status', 'tempat', 'norekening');
 
 	public $timestamps = false;	
 
@@ -40,6 +40,7 @@ class Pelatihan extends Eloquent {
 		$this->tempat = $input['lokasi'];
 		$this->uraian = $input['ck'];
 		$this->biaya = $input['biaya'];
+		$this->norekening = $input['norekening'];
 		$this->dp = $input['dp'];
 		$this->pelunasan = $input['pelunasan'];
 		$this->kuota = $input['kuota'];

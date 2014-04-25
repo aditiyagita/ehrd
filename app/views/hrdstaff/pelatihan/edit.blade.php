@@ -83,15 +83,21 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label for="biaya" class="control-label">No. Rekening</label>
+                                        <div class="controls">
+                                            <input type="number" value="{{ $data['pelatihan']->norekening }}" name="norekening" id="norekening" class="input-block-level" min="1" max="999999999999" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <label for="biaya" class="control-label">DP</label>
                                         <div class="controls">
-                                            <input type="number" value="{{ $data['pelatihan']->dp }}" name="dp" id="dp" class="input-block-level" min="1" max="999999999999">
+                                            <input type="number" value="{{ $data['pelatihan']->dp }}" name="dp" id="dp" class="input-block-level" min="0" max="999999999999">
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label for="biaya" class="control-label">Pelunasan</label>
                                         <div class="controls">
-                                            <input type="number" value="{{ $data['pelatihan']->pelunasan }}" name="pelunasan" id="pelunasan" class="input-block-level" min="1" max="999999999999">
+                                            <input type="number" value="{{ $data['pelatihan']->pelunasan }}" name="pelunasan" id="pelunasan" class="input-block-level" min="0" max="999999999999">
                                         </div>
                                     </div>
                                     <div class="control-group">

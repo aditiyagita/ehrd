@@ -63,6 +63,19 @@
                                         <td widht=30%><strong>Biaya</strong></td>
                                         <td>{{ $data['pelatihan']->biaya == null ? '-' : $data['pelatihan']->biaya }}</td>
                                     </tr>
+
+                                    <tr>
+                                        <td widht=30%><strong>No. Rekening</strong></td>
+                                        <td>{{ $data['pelatihan']->norekening == null ? '-' : $data['pelatihan']->norekening }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td widht=30%><strong>DP</strong></td>
+                                        <td>{{ $data['pelatihan']->dp == null ? '-' : $data['pelatihan']->dp }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td widht=30%><strong>Pelunasan</strong></td>
+                                        <td>{{ $data['pelatihan']->pelunasan == null ? '-' : $data['pelatihan']->pelunasan }}</td>
+                                    </tr> 
                                     <tr>
                                         <td colspan=2>{{ $data['pelatihan']->uraian }}</td>
                                     </tr>   
