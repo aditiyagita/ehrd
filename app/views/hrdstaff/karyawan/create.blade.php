@@ -128,7 +128,11 @@
 															<option value="" SELECTED>-Pilih Hak Akses-</option>
 															<?php $i=1;?>
 															@foreach ($data['jabatan'] as $jabatan)
+																@if($jabatan->idjabatan == 7)
+
+                                                                @else
 																<option value="{{ $jabatan->idjabatan }}">{{ $jabatan->jabatan }}</option>
+																@endif
 								                            <?php $i++ ?>
 								                            @endforeach
 														</select>

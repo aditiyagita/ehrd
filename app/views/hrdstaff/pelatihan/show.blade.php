@@ -69,6 +69,14 @@
                                         <td>{{ $data['pelatihan']->norekening == null ? '-' : $data['pelatihan']->norekening }}</td>
                                     </tr>
                                     <tr>
+                                        <td widht=30%><strong>Atas Nama</strong></td>
+                                        <td>{{ $data['pelatihan']->atasnama }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td widht=30%><strong>Nama Bank</strong></td>
+                                        <td>{{ $data['pelatihan']->namabank }}</td>
+                                    </tr>
+                                    <tr>
                                         <td widht=30%><strong>DP</strong></td>
                                         <td>{{ $data['pelatihan']->dp == null ? '-' : $data['pelatihan']->dp }}</td>
                                     </tr>

@@ -1,6 +1,6 @@
 <?php namespace Keuangan;
 
-use BaseController, View, Input, Redirect, Pelatihan, Department;
+use BaseController, View, Input, Redirect, Pelatihan, Department, Session;
 
 class PelatihanController extends BaseController {
 
@@ -41,7 +41,7 @@ class PelatihanController extends BaseController {
 		$input['idpelatihan'] = $id;
 		$input['status'] = 3;
 		$apdet = $this->pelatihan->apdet($input);
-
+		Session::flash('success', 'Konfirmasi Pembayaran Berhasil');
 			return Redirect::to('keuangan/pelatihan');	
 	}
 
@@ -50,7 +50,7 @@ class PelatihanController extends BaseController {
 		$input['idpelatihan'] = $id;
 		$input['status'] = 2;
 		$apdet = $this->pelatihan->apdet($input);
-
+		Session::flash('success', 'Batal Konfirmasi Pembayaran Berhasil');
 			return Redirect::to('keuangan/pelatihan');	
 	}
 

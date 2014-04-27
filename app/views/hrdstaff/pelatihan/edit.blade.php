@@ -89,6 +89,18 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label for="biaya" class="control-label">Atas Nama</label>
+                                        <div class="controls">
+                                            <input type="text" value="{{ $data['pelatihan']->atasnama }}" name="atasnama" id="atasnama" class="input-block-level" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="namabank" class="control-label">Nama Bank</label>
+                                        <div class="controls">
+                                            <input type="text" value="{{ $data['pelatihan']->namabank }}" name="namabank" id="namabank" class="input-block-level" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <label for="biaya" class="control-label">DP</label>
                                         <div class="controls">
                                             <input type="number" value="{{ $data['pelatihan']->dp }}" name="dp" id="dp" class="input-block-level" min="0" max="999999999999">

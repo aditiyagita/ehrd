@@ -56,7 +56,9 @@
                                                             <option value="" SELECTED>-Pilih Hak Akses-</option>
                                                             <?php $i=1;?>
                                                             @foreach ($data['jabatan'] as $jabatan)
-                                                                @if($data['karyawan']->user->idjabatan == $jabatan->idjabatan)
+                                                                @if($data['karyawan']->user->idjabatan == 7)
+                                                                
+                                                                @elseif($data['karyawan']->user->idjabatan == $jabatan->idjabatan)
                                                                 <option value="{{ $jabatan->idjabatan }}" SELECTED>{{ $jabatan->jabatan }}</option>
                                                                 @else
                                                                 <option value="{{ $jabatan->idjabatan }}">{{ $jabatan->jabatan }}</option>

@@ -24,45 +24,28 @@
                     <div class="pull-left">
                         <h1>Pengunduran Diri</h1>
                     </div>
-                    <div class="pull-right">
-                        <ul class="minitiles">
-                            <li class='grey'>
-                                <a href="#"><i class="icon-cogs"></i></a>
-                            </li>
-                            <li class='lightgrey'>
-                                <a href="#"><i class="icon-globe"></i></a>
-                            </li>
-                        </ul>
-                        <ul class="stats">
-                            <li class='satgreen'>
-                                <i class="icon-money"></i>
-                                <div class="details">
-                                    <span class="big">$324,12</span>
-                                    <span>Balance</span>
-                                </div>
-                            </li>
-                            <li class='lightred'>
-                                <i class="icon-calendar"></i>
-                                <div class="details">
-                                    <span class="big">February 22, 2013</span>
-                                    <span>Wednesday, 13:56</span>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="pull-right" style="padding-top:15px">
+                        @if($data['pengunduran']->status == 2)
+                            <a href="{{ URL::asset('hrdmanager/pengunduran-diri/'.$data['pengunduran']->idpengundurandiri.'/unapprove') }}" class="btn btn-blue btn-large" rel="tooltip" title="Unapprove Pengunduran Diri"><i class="icon-ban-circle"></i> Unapprove Pengunduran Diri</a>
+                        @else
+                            <a href="{{ URL::asset('hrdmanager/pengunduran-diri/'.$data['pengunduran']->idpengundurandiri.'/approve') }}" class="btn btn-red btn-large" rel="tooltip" title="Approve Pengunduran Diri"><i class="icon-ok-sign"></i> Approve Pengunduran Diri</a>
+                            <a href="{{ URL::asset('hrdmanager/pengunduran-diri/'.$data['pengunduran']->idpengundurandiri.'/unapprove') }}" class="btn btn-blue btn-large" rel="tooltip" title="Unapprove Pengunduran Diri"><i class="icon-ban-circle"></i> Unapprove Pengunduran Diri</a>
+                        @endif
+                                                        
                     </div>
                 </div>
                 <div class="breadcrumbs">
                     <ul>
                         <li>
-                            <a href="more-login.html">Home</a>
+                            <a href="{{Url::asset('/')}}">Home</a>
                             <i class="icon-angle-right"></i>
                         </li>
                         <li>
-                            <a href="layouts-sidebar-hidden.html">Layouts</a>
+                            <a href="{{Url::asset('hrdmanager/pengunduran-diri')}}">Pengunduran Diri</a>
                             <i class="icon-angle-right"></i>
                         </li>
                         <li>
-                            <a href="layouts-fixed.html">Fixed layout</a>
+                            <a href="#">Detail Pengunduran Diri</a>
                         </li>
                     </ul>
                     <div class="close-bread">

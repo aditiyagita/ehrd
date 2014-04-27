@@ -30,13 +30,18 @@
 				
 				<div class="user">
 				@if(Auth::check())
-				<?php
-					$iduser = Auth::user()->iduser;
-					$lamaran = new Lamaran();
-					$coba = $lamaran->getListLamaran($iduser);
-					$terima = $lamaran->getListTerima($iduser);
-				?>
+
+<!-- ---------------------------------------------------------------------
+--------------------------------------------------------------------------
+----------------------  PELAMAR  ------------------------------------- -->
+
 					@if(Auth::user()->idjabatan == 7)
+						<?php
+							$iduser = Auth::user()->iduser;
+							$lamaran = new Lamaran();
+							$coba = $lamaran->getListLamaran($iduser);
+							$terima = $lamaran->getListTerima($iduser);
+						?>
 						<ul class="icon-nav">
 							<li class='dropdown'>
 								<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-briefcase"></i>
@@ -91,6 +96,350 @@
 								</li>
 								<li>
 									<a href="{{URL::asset('application')}}">My Application</a>
+								</li>
+								@if(Auth::check())
+									<li>
+										<a href="{{ URL::asset('logout') }}">Logout</a>
+									</li>
+								@endif
+							</ul>
+						</div>
+
+<!-- ---------------------------------------------------------------------
+--------------------------------------------------------------------------
+----------------------HRD STAFF------------------------------------- -->
+
+					@elseif(Auth::user()->idjabatan == 1)
+						<?php
+							$notif = new Notifikasi();
+							$notifikasi = $notif->getNotifikasi();
+							$total = count($notifikasi);
+						?>
+						<script type="text/javascript">
+							 $(document).ready(function() { 
+						        $('.notif').click(function(){
+						            var url = "{{ URL::asset('updatenotification') }}"; 
+						            $.ajax({
+									  type: "GET",
+									  url: url
+									});
+									$('.ceks').fadeOut("slow");
+						        });
+						    });
+						</script>
+						<ul class="icon-nav">
+							<li class='dropdown notif'>
+								<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-globe"></i>
+
+									@if($total <> 0)
+										<span class="label label-lightred ceks">{{ $total }}</span>
+									@endif
+								</a>
+								<ul class="dropdown-menu pull-right message-ul">
+									@if($total == 0)
+									<li>
+										<a href="#">
+											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+											<div class="details">
+												<div class="name">Kosong</div>
+												<div class="message">
+													Tidak Ada Notifikasi
+												</div>
+											</div>
+										</a>
+									</li>
+									@else
+										@if(count($notifikasi) > 0)
+										@foreach($notifikasi as $not)
+										<li>
+											@if($not->type <> 'Cuti')
+											<a href="{{URL::asset('hrdstaff/pelatihan')}}">
+											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+												<div class="details">
+													<div class="name">{{$not->type}}</div>
+													<div class="message">
+													{{ $not->uraian }}
+													</div>
+												</div>
+											</a>
+											@endif
+										</li>
+										@endforeach
+										@endif
+									@endif
+								</ul>
+							</li>
+						</ul>
+						
+						<div class="dropdown">
+							<a href="#" class='dropdown-toggle' data-toggle="dropdown">{{ Auth::user()->nama_panggilan }} 
+								@if((Auth::user()->foto) == '')
+								<img src="{{ URL::asset('assets/images/user/default.jpg') }}" width="27px" />
+								@else
+								<img src="{{ URL::asset('assets/images/user/'.Auth::user()->foto) }}" width="27px"/>
+								@endif
+							<ul class="dropdown-menu pull-right">
+								<li>
+									<a href="{{Url::asset('myprofile')}}">My Profile</a>
+								</li>
+								@if(Auth::check())
+									<li>
+										<a href="{{ URL::asset('logout') }}">Logout</a>
+									</li>
+								@endif
+							</ul>
+						</div>
+
+<!-- ---------------------------------------------------------------------
+--------------------------------------------------------------------------
+----------------------HRD MANAGER------------------------------------- -->
+
+					@elseif(Auth::user()->idjabatan == 2)
+						<?php
+							$iduser 			= Auth::user()->iduser;
+							$pelatihan 			= new Pelatihan();
+							$cuti 				= new Cuti();
+							$pengundurandiri 	= new PengunduranDiri();
+							$coba 				= $pelatihan->getNotif();
+							$coba1 				= $cuti->getNotif();
+							$coba2 				= $pengundurandiri->getNotif();
+							$total 				= count($coba)+count($coba1)+count($coba2);
+						?>
+						<ul class="icon-nav">
+							<li class='dropdown'>
+								<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-globe"></i>
+
+									@if($total <> 0)
+										<span class="label label-lightred">{{ $total }}</span>
+									@endif
+								</a>
+								<ul class="dropdown-menu pull-right message-ul">
+									@if($total == 0)
+									<li>
+										<a href="#">
+											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+											<div class="details">
+												<div class="name">Kosong</div>
+												<div class="message">
+													Tidak Ada Notifikasi
+												</div>
+											</div>
+										</a>
+									</li>
+									@else
+										@if(count($coba) > 0)
+										<li>
+											<a href="{{URL::asset('hrdmanager/pelatihan')}}">
+												<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+												<div class="details">
+													<div class="name">Pelatihan</div>
+													<div class="message">
+													{{ count($coba) }} Pelatihan Belum Disetujui
+													</div>
+												</div>
+											</a>
+										</li>
+										@endif
+
+										@if(count($coba1) > 0)
+										<li>
+											<a href="{{URL::asset('hrdmanager/cuti')}}">
+												<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+												<div class="details">
+													<div class="name">Cuti Karyawan</div>
+													<div class="message">
+														{{ count($coba1) }} Cuti Karyawan Belum Disetujui
+													</div>
+												</div>
+											</a>
+										</li>
+										@endif
+
+										@if(count($coba2) > 0)
+										<li>
+											<a href="{{URL::asset('hrdmanager/pengunduran-diri')}}">
+												<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+												<div class="details">
+													<div class="name">Pengunduran Diri</div>
+													<div class="message">
+														{{ count($coba2) }} Pengunduran Diri Belum Disetujui
+													</div>
+												</div>
+											</a>
+										</li>
+										@endif
+									@endif
+								</ul>
+							</li>
+						</ul>
+						
+						<div class="dropdown">
+							<a href="#" class='dropdown-toggle' data-toggle="dropdown">{{ Auth::user()->nama_panggilan }} 
+								@if((Auth::user()->foto) == '')
+								<img src="{{ URL::asset('assets/images/user/default.jpg') }}" width="27px" />
+								@else
+								<img src="{{ URL::asset('assets/images/user/'.Auth::user()->foto) }}" width="27px"/>
+								@endif
+							<ul class="dropdown-menu pull-right">
+								<li>
+									<a href="{{Url::asset('myprofile')}}">My Profile</a>
+								</li>
+								@if(Auth::check())
+									<li>
+										<a href="{{ URL::asset('logout') }}">Logout</a>
+									</li>
+								@endif
+							</ul>
+						</div>
+
+<!-- ---------------------------------------------------------------------
+--------------------------------------------------------------------------
+----------------------  KEUANGAN  ------------------------------------- -->
+
+					@elseif(Auth::user()->idjabatan == 5)
+						<?php
+							$iduser 			= Auth::user()->iduser;
+							$pelatihan 			= new Pelatihan();
+							$coba 				= $pelatihan->getNotif();
+							$total 				= count($coba);
+						?>
+						<ul class="icon-nav">
+							<li class='dropdown'>
+								<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-globe"></i>
+
+									@if($total <> 0)
+										<span class="label label-lightred">{{ $total }}</span>
+									@endif
+								</a>
+								<ul class="dropdown-menu pull-right message-ul">
+									@if($total == 0)
+									<li>
+										<a href="#">
+											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+											<div class="details">
+												<div class="name">Kosong</div>
+												<div class="message">
+													Tidak Ada Notifikasi
+												</div>
+											</div>
+										</a>
+									</li>
+									@else
+										@if(count($coba) > 0)
+										<li>
+											<a href="{{URL::asset('keuangan/pelatihan')}}">
+												<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+												<div class="details">
+													<div class="name">Pelatihan</div>
+													<div class="message">
+													{{ count($coba) }} Pelatihan Belum Dikonfirmasi
+													</div>
+												</div>
+											</a>
+										</li>
+										@endif
+									@endif
+								</ul>
+							</li>
+						</ul>
+						
+						<div class="dropdown">
+							<a href="#" class='dropdown-toggle' data-toggle="dropdown">{{ Auth::user()->nama_panggilan }} 
+								@if((Auth::user()->foto) == '')
+								<img src="{{ URL::asset('assets/images/user/default.jpg') }}" width="27px" />
+								@else
+								<img src="{{ URL::asset('assets/images/user/'.Auth::user()->foto) }}" width="27px"/>
+								@endif
+							<ul class="dropdown-menu pull-right">
+								<li>
+									<a href="{{Url::asset('myprofile')}}">My Profile</a>
+								</li>
+								@if(Auth::check())
+									<li>
+										<a href="{{ URL::asset('logout') }}">Logout</a>
+									</li>
+								@endif
+							</ul>
+						</div>
+
+<!-- ---------------------------------------------------------------------
+--------------------------------------------------------------------------
+----------------------  KARYAWAN  ------------------------------------- -->
+
+						@elseif(Auth::user()->idjabatan == 6)
+						<?php
+							$notif = new Notifikasi();
+							$notifikasi = $notif->getNotifikasi();
+							$total = count($notifikasi);
+						?>
+						<script type="text/javascript">
+							 $(document).ready(function() { 
+						        $('.notif').click(function(){
+						            var url = "{{ URL::asset('updatenotification') }}"; 
+						            $.ajax({
+									  type: "GET",
+									  url: url
+									});
+									$('.ceks').fadeOut("slow");
+						        });
+						    });
+						</script>
+						<ul class="icon-nav">
+							<li class='dropdown notif'>
+								<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-globe"></i>
+
+									@if($total <> 0)
+										<span class="label label-lightred ceks">{{ $total }}</span>
+									@endif
+								</a>
+								<ul class="dropdown-menu pull-right message-ul">
+									@if($total == 0)
+									<li>
+										<a href="#">
+											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+											<div class="details">
+												<div class="name">Kosong</div>
+												<div class="message">
+													Tidak Ada Notifikasi
+												</div>
+											</div>
+										</a>
+									</li>
+									@else
+										@if(count($notifikasi) > 0)
+										@foreach($notifikasi as $not)
+										<li>
+											@if($not->type == 'Cuti')
+											<a href="{{URL::asset('karyawan/cuti')}}">
+											@else
+											<a href="{{URL::asset('karyawan/pelatihan')}}">
+											@endif
+											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+												<div class="details">
+													<div class="name">{{$not->type}}</div>
+													<div class="message">
+													{{ $not->uraian }}
+													</div>
+												</div>
+											</a>
+										</li>
+										@endforeach
+										@endif
+									@endif
+								</ul>
+							</li>
+						</ul>
+						
+						<div class="dropdown">
+							<a href="#" class='dropdown-toggle' data-toggle="dropdown">{{ Auth::user()->nama_panggilan }} 
+								@if((Auth::user()->foto) == '')
+								<img src="{{ URL::asset('assets/images/user/default.jpg') }}" width="27px" />
+								@else
+								<img src="{{ URL::asset('assets/images/user/'.Auth::user()->foto) }}" width="27px"/>
+								@endif
+							<ul class="dropdown-menu pull-right">
+								<li>
+									<a href="{{Url::asset('myprofile')}}">My Profile</a>
 								</li>
 								@if(Auth::check())
 									<li>

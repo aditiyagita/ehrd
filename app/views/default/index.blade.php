@@ -76,8 +76,8 @@ function checkSize(max_img_size)
 								<h3>
 								</h3>
 							</div>
-								{{ Form::model($data["user"], array('method' => 'PATCH','files'=> 'true', 'onsubmit' => 'return checkSize(2097152)', 'class' => 'form-vertical login-column', 'route' => array('resume.update', $data["user"]->iduser))) }}
-            						{{ Form::hidden('id', $data['user']->iduser) }}
+							{{ Form::open(array('url' => 'updatemyprofile', 'class' => 'form-vertical login-column', 'onsubmit' => 'return checkSize(2097152)', 'files'=> 'true')) }}
+		    						{{ Form::hidden('id', $data['user']->iduser) }}
 									<div class="box">
 										<div class="box-content nopadding">
 											<div class="span6"  >

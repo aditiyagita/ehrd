@@ -51,4 +51,9 @@ class Peserta extends Eloquent {
             $idagama = $input['idagama'];
             self::find($idagama)->update($input);
     }
+
+    public function cekJum($value)
+    {
+    	return self::where('idpelatihan', $value)->get();
+    }
 }

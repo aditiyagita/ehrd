@@ -5,7 +5,7 @@ class Pelatihan extends Eloquent {
 	protected $primaryKey = 'idpelatihan';
 	protected $table = 'pelatihan';
 	protected $guarded = array();
-	protected $fillable = array('tanggalmulai', 'tanggalselesai', 'judul', 'uraian', 'biaya', 'dp', 'pelunasan', 'kuota', 'status', 'tempat', 'norekening');
+	protected $fillable = array('tanggalmulai', 'tanggalselesai', 'judul', 'uraian', 'biaya', 'dp', 'pelunasan', 'kuota', 'status', 'tempat', 'norekening', 'atasnama', 'namabank');
 
 	public $timestamps = false;	
 
@@ -25,12 +25,26 @@ class Pelatihan extends Eloquent {
 		if ($id != null) {
             return self::find($id);
         }else{
-            return self::all();
+            return self::whereRaw('status != ? OR (status = ? AND tanggalmulai > ?)', array(1, 1, self::getDateFormat()))->get();
         }
 	}
 
 	public function getPelatihanKaryawan(){
 		return self::where('status', 3)->get();
+	}
+
+	public function getNotif()
+	{
+		if(Auth::user()->idjabatan == 5){
+			return self::where('status', 2)->where('tanggalmulai', '>', self::getDateFormat())->get();
+		}elseif(Auth::user()->idjabatan == 6){	
+			return self::whereRaw('status IN (?)', array(3))->where('tanggalmulai', '>', self::getDateFormat())->get();
+		}elseif(Auth::user()->idjabatan == 2){
+			return self::whereRaw('status = ? AND tanggalmulai > ?', array(1, self::getDateFormat()))->get();	
+		}else{
+			return self::where('status', 1)->where('tanggalmulai', '>', self::getDateFormat())->get();	
+		}
+		
 	}
 
 	public function simpan($input){
@@ -41,6 +55,8 @@ class Pelatihan extends Eloquent {
 		$this->uraian = $input['ck'];
 		$this->biaya = $input['biaya'];
 		$this->norekening = $input['norekening'];
+		$this->atasnama = $input['atasnama'];
+		$this->namabank = $input['namabank'];
 		$this->dp = $input['dp'];
 		$this->pelunasan = $input['pelunasan'];
 		$this->kuota = $input['kuota'];
@@ -65,5 +81,13 @@ class Pelatihan extends Eloquent {
     	}
     	return $cek;
     }
+
+    public function updateNotifKaryawan($value)
+	{
+		$user =  DB::table('pelatihan')
+					->where('status', 3)
+					->update(array('status' => 5));
+
+	}
 
 }

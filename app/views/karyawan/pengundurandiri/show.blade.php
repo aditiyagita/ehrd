@@ -43,7 +43,7 @@
                     <div class="span12">
                         <div class="post-content">
                             <div style="float:right">
-                                <a href="{{Url::asset('karyawan/pengunduran-diri/delete/'.$data['pengunduran']->idpengundurandiri)}}" class="btn btn-large btn-blue">Batal Pengunduran Diri</a>
+                                <a href="{{Url::asset('karyawan/pengunduran-diri/delete/'.$data['pengunduran']->idpengundurandiri)}}" class="btn btn-large btn-brown">Batal Pengunduran Diri</a>
                             </div>
                             <div class="post-meta">
                                 <span class="date">

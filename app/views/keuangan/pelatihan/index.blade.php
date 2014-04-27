@@ -28,6 +28,13 @@
 						<a href="#"><i class="icon-remove"></i></a>
 					</div>
 				</div>
+				@if($cek = Session::get('success'))
+					<div class="alert alert-success" style="margin-top:15px">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Berhasil!</strong>
+                        {{ Session::get('success') }}
+                    </div>
+				@endif
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="box">
@@ -60,8 +67,10 @@
 														<span class="label label-satgreen">Sudah Dibayar</span>
 													@elseif($pelatihan->status == 2)	
 														<span class="label">Sudah Disetujui</span>
+													@elseif($pelatihan->status == 4)	
+														<span class="label label-lightred">Tidak Disetujui</span>
 													@else
-														<span class="label label-lightred">Belum Disetujui</span>
+														<span class="label label-lightblue">Belum Disetujui</span>
 													@endif
 												</td>
 												<td class='hidden-480'>

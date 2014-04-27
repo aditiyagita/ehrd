@@ -49,13 +49,17 @@
 									<tbody>
 										<?php $i=1; ?>
 										@foreach($data['pelatihan'] as $pelatihan)
+										<?php 
+											$peserta = new Peserta();
+											$jmlpeserta[$i] = $peserta->cekJum($pelatihan->idpelatihan);
+										?>
 											<tr>
 												<td><center>{{ $i }}</center></td>
 												<td>{{ date("d M Y", strtotime($pelatihan->tanggalmulai)) }}</td>
 												<td>{{ date("d M Y", strtotime($pelatihan->tanggalselesai)) }}</td>
 												<td>{{ $pelatihan->judul }}</td>
 												<td>{{ $pelatihan->kuota }}</td>
-												<td>{{ $sisa = $pelatihan->kuota-count($pelatihan->peserta) }}</td>
+												<td>{{ $sisa = ($pelatihan->kuota)-count($jmlpeserta[$i]) }} </td>
 												<td class='hidden-480'>
 													@if($sisa > 0)
 													<center>

@@ -5,7 +5,7 @@ class Karyawan extends Eloquent {
 	protected $primaryKey = 'nokaryawan';
 	protected $table = 'karyawan';
 	protected $guarded = array();
-	protected $fillable  =array('iduser','iddepartment','norekening','namabank','gaji','tunjanganjabatan', 'tunjangan_harian');
+	protected $fillable  =array('iduser','iddepartment','norekening','namabank','gaji','tunjanganjabatan', 'tunjangan_harian', 'status');
 
 	public $timestamps = false;
 

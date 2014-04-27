@@ -26,7 +26,7 @@
                     </div>
                     <div class="pull-right" style="padding-top:15px">
                         @if( $data['pelatihan']->status == 2 )
-                            <a href="{{ Url::asset('keuangan/approve-pelatihan/'.$data['pelatihan']->idpelatihan.'') }}" class="btn btn-blue btn-large" rel="tooltip" title="Konfirmasi Pembayaran"><i class="icon-check"></i> Approve</a>
+                            <a href="{{ Url::asset('keuangan/approve-pelatihan/'.$data['pelatihan']->idpelatihan.'') }}" class="btn btn-blue btn-large" rel="tooltip" title="Konfirmasi Pembayaran"><i class="icon-check"></i> Konfirmasi</a>
                         @elseif($data['pelatihan']->status == 3 )
                             <a href="{{ Url::asset('keuangan/unapprove-pelatihan/'.$data['pelatihan']->idpelatihan.'') }}" class="btn btn-red btn-large" rel="tooltip" title="Batal Konfirmasi"><i class="icon-ban-circle"></i> Batal Konfirmasi</a>
                         @else

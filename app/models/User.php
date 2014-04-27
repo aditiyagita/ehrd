@@ -13,7 +13,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $primaryKey = 'iduser';
 	protected $table = 'users';
 	public $timestamps = false; 
-	protected $fillable  = array('nama_lengkap','nama_panggilan','alamat','kode_pos','no_telp','no_hp','tempat_lahir','tanggal_lahir','warga_negara','no_ktp','no_passport','idjabatan','agama','jenis_kelamin','berat_badan','tinggi_badan','status_kawin', 'foto', 'kacamata');
+	protected $fillable  = array('nama_lengkap','nama_panggilan','alamat','kode_pos','no_telp','no_hp','tempat_lahir','tanggal_lahir','warga_negara','no_ktp','no_passport','idjabatan','agama','jenis_kelamin','berat_badan','tinggi_badan','status_kawin', 'foto', 'kacamata', 'username', 'password');
 
 	/**
 	 * The attributes excluded from the model's JSON form.

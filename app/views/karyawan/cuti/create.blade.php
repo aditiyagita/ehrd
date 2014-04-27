@@ -98,7 +98,11 @@
 												<select name="pengganti" id="pengganti" class='select2-me input-block-level' required>
 													<option value="" selected>-Pilih Pengganti-</option>
 													@foreach($data['karyawan'] as $karyawan)
+													@if(($karyawan->user->iduser == Auth::user()->iduser) OR $karyawan->user->idjabatan <> 6 OR $karyawan->status == 1)
+
+													@else
 													<option value="{{$karyawan->nokaryawan}}">{{ $karyawan->user->nama_lengkap}}</option>
+													@endif
 													@endforeach
 												</select>
 											</div>

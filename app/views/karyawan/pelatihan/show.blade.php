@@ -24,6 +24,13 @@
                     <div class="pull-left">
                         <h1>Pelatihan</h1>
                     </div>
+                    <div class="pull-right" style="padding-top:15px">
+                        @if($data['cekpeserta'] == 0)
+                            <a href="{{Url::asset('karyawan/ikut-pelatihan/'.$data['pelatihan']->idpelatihan)}}" class="btn btn-large btn-brown"><i class="icon-ok"></i> Ikut Pelatihan</a>
+                        @else
+                            <a href="#" class="btn btn-large btn-brown"><i class="icon-check"></i> Sudah Mendaftar Pelatihan</a>
+                        @endif
+                    </div>
                 </div>
                 <div class="breadcrumbs">
                     <ul>
@@ -46,13 +53,6 @@
                     <div class="span12">
                         <div class="post-content">
                             <h3 class="post-title">{{ $data['pelatihan']->judul }}</h3>
-                            <div style="float:right">
-                                @if($data['cekpeserta'] == 0)
-                                <a href="{{Url::asset('karyawan/ikut-pelatihan/'.$data['pelatihan']->idpelatihan)}}" class="btn btn-large btn-blue">Ikut Pelatihan</a>
-                                @else
-                                    <h4>Sudah Mendaftar Pelatihan</h4>
-                                @endif
-                            </div>
                             <div class="post-meta">
                                 <span class="date">
                                     <h5>Tanggal: {{ date('d M Y', strtotime($data['pelatihan']->tanggalmulai)) }} - {{ date('d M Y', strtotime($data['pelatihan']->tanggalselesai)) }}</h5>

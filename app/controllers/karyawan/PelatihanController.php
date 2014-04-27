@@ -23,7 +23,7 @@ class PelatihanController extends BaseController {
       	$data['tanda']	 	= $this->tanda;
   	  	$data['title'] 		= $this->title;
   	  	$data['pelatihan'] 	= $this->pelatihan->getPelatihanKaryawan();
-	  	return View::make('karyawan.pelatihan.index')
+  	  	return View::make('karyawan.pelatihan.index')
 					->with('data', $data);
   	}
 	

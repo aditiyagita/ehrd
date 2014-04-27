@@ -42,6 +42,13 @@
 						<a href="#"><i class="icon-remove"></i></a>
 					</div>
 				</div>
+				@if($cek = Session::get('success'))
+					<div class="alert alert-success" style="margin-top:15px">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Berhasil!</strong>
+                        {{ Session::get('success') }}
+                    </div>
+				@endif
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="box">
@@ -53,11 +60,11 @@
 										<tr>
 											<th width="5%">No</th>
 											<th width="15%">Tanggal</th>
-											<th width="15%">No. Karyawan</th>
+											<th width="10%">No. Karyawan</th>
 											<th width="20%">Nama Lengkap</th>
 											<th width="25%">Department</th>
-											<th width="20%">Status</th>
-											<th class='hidden-480 width="20%'>Operasi</th>
+											<th width="15%">Status</th>
+											<th width="25%">Operasi</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -71,17 +78,20 @@
 												<td>{{ $pengunduran->karyawan->department->department }}</td>
 												<td>
 													@if($pengunduran->status == 2)
-														<span class="label label-satgreen">Sudah Disetujui</span>
+														<span class="label label-lightred">Sudah Disetujui</span>
+													@elseif($pengunduran->status == 1)
+														<span class="label label-satgreen">Tidak Disetujui</span>
 													@else
-														<span class="label label-lightred">Belum Disetujui</span>
+														<span class="label">Belum Disetujui</span>
 													@endif
 												</td>
 												<td class='hidden-480'>
 													<center>
-														@if($pengunduran->status == 2)
-															
+														@if(($pengunduran->status == 2) OR ($pengunduran->status == 1))
+														
 														@else
 															<a href="{{ URL::asset('hrdmanager/pengunduran-diri/'.$pengunduran->idpengundurandiri.'/approve') }}" class="btn btn-red" rel="tooltip" title="Approve Pengunduran Diri"><i class="icon-ok-sign"></i></a>
+															<a href="{{ URL::asset('hrdmanager/pengunduran-diri/'.$pengunduran->idpengundurandiri.'/unapprove') }}" class="btn btn-blue" rel="tooltip" title="Unapprove Pengunduran Diri"><i class="icon-ban-circle"></i></a>
 														@endif
 														<a href="{{ URL::asset('hrdmanager/pengunduran-diri/'.$pengunduran->idpengundurandiri ) }}" class="btn" rel="tooltip" title="Detail Pengunduran Diri"><i class="icon-search"></i></a>
 														

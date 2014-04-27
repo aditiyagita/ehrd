@@ -68,21 +68,23 @@
 									<tbody>
 										<?php $i=1; ?>
 										@foreach($data['karyawan'] as $karyawan)
-											<tr>
-												<td><center>{{ $i }}</center></td>
-												<td>{{ $karyawan->nokaryawan }}</td>
-												<td>{{ $karyawan->user->nama_lengkap }}</td>
-												<td>{{ $karyawan->user->jabatan->jabatan }}</td>
-												<td>{{ $karyawan->gaji }}</td>
-												<td>{{ $karyawan->norekening }}</td>
-												<td class='hidden-480'>
-													<center>
-														<a href="{{ Url::asset('hrdstaff/karyawan/'.$karyawan->nokaryawan.'/edit') }}" class="btn btn-green" rel="tooltip" title="Edit"><i class="icon-edit"></i></a>
-														<a href="javascript:hapusAction({{ $karyawan->nokaryawan }})" class="btn btn-red" rel="tooltip" title="Delete"><i class="icon-remove"></i></a>
-													</center>
-												</td>
-											</tr>
-											<?php $i++; ?>
+											@if($karyawan->status == 0)
+												<tr>
+													<td><center>{{ $i }}</center></td>
+													<td>{{ $karyawan->nokaryawan }}</td>
+													<td>{{ $karyawan->user->nama_lengkap }}</td>
+													<td>{{ $karyawan->user->jabatan->jabatan }}</td>
+													<td>{{ $karyawan->gaji }}</td>
+													<td>{{ $karyawan->norekening }}</td>
+													<td class='hidden-480'>
+														<center>
+															<a href="{{ Url::asset('hrdstaff/karyawan/'.$karyawan->nokaryawan.'/edit') }}" class="btn btn-green" rel="tooltip" title="Edit"><i class="icon-edit"></i></a>
+															<a href="javascript:hapusAction({{ $karyawan->nokaryawan }})" class="btn btn-red" rel="tooltip" title="Delete"><i class="icon-remove"></i></a>
+														</center>
+													</td>
+												</tr>
+												<?php $i++; ?>
+											@endif
 										@endforeach
 									</tbody>
 								</table>
@@ -104,7 +106,7 @@
 	    <input type="hidden" id="id" />
 	</div>
 	<div class="modal-footer">
-	    <button class="btn btn-green" data-dismiss="modal" aria-hidden="true">Tidak</button>
+	    <button class="btn" data-dismiss="modal" aria-hidden="true">Tidak</button>
 	    <button class="btn btn-red" id="okHapus">Ya</button>
 	</div>
 </div>

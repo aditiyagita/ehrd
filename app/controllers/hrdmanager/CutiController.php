@@ -1,6 +1,6 @@
 <?php namespace Hrdmanager;
 
-use BaseController, View, Input, Redirect, Cuti, user, Karyawan, Auth, SettingCuti; // Tanggal;
+use BaseController, View, Input, Redirect, Cuti, user, Karyawan, Auth, SettingCuti, Session; // Tanggal;
 
 class CutiController extends BaseController {
 
@@ -11,7 +11,7 @@ class CutiController extends BaseController {
                       )
         );
       	$this->tanda = array('');
-	    $this->title = 'Cuti';
+	    $this->title = 'HRD Manager JC & K - Cuti';
 	    $this->cuti = new Cuti();
 	    $this->kary = new Karyawan();
 	    $this->user = new user();
@@ -46,6 +46,7 @@ class CutiController extends BaseController {
 		$input['idcuti'] = $value;
 		$input['status'] = 2;
 		$this->cuti->approveCuti($input);
+		Session::flash('success', 'Not Approve Pengunduran Diri Berhasil');
 		return Redirect::back();
 	}
 	public function unapproveCuti($value)
@@ -53,6 +54,7 @@ class CutiController extends BaseController {
 		$input['idcuti'] = $value;
 		$input['status'] = 1;
 		$this->cuti->approveCuti($input);
+		Session::flash('success', 'Not Approve Pengunduran Diri Berhasil');
 		return Redirect::back();
 	}
 

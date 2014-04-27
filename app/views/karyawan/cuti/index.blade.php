@@ -92,11 +92,11 @@
 												</td>
 												<td>{{ $cuti->nama_lengkap }}</td>
 												<td class='hidden-480'>
-													@if($cuti->status == 2)
-
+													@if( ($cuti->status == 2) OR ($cuti->status == 3) OR ($cuti->status == 4) )
+														<span class="label label-satgreen">Approved</span>
 													@else
 													<center>
-														<a href="javascript:hapusAction({{ $cuti->idcuti }})" class="btn btn-red" rel="tooltip" title="Batal Cuti"><i class="icon-remove"></i></a>
+														<a href="javascript:hapusAction({{ $cuti->idcuti }})" class="btn btn-red" rel="tooltip" title="Batal Cuti"><i class="icon-remove"></i> {{$cuti->nama_lengkap}}</a>
 													</center>
 													@endif
 												</td>

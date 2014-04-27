@@ -61,7 +61,7 @@
 							            </div>
 							        </div>
 							        <div class="form-actions">
-										<button type="submit" class="btn btn-primary">Save changes</button>
+										<button type="submit" class="btn btn-brown">Save changes</button>
 										<button type="button" class="btn">Cancel</button>
 									</div>
 								{{Form::close()}}

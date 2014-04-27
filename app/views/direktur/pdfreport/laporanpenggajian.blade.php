@@ -83,6 +83,9 @@ table.laporan tbody td{
 			<td><center>Mengetahui,</center></td><td width=65%></td>
 		</tr>
 		<tr>
+			<td><center>Manager HRD</center></td><td width=65%></td>
+		</tr>
+		<tr>
 			<td><br><br><br><br></td><td></td>
 		</tr>
 		<tr>

@@ -42,6 +42,13 @@
 						<a href="#"><i class="icon-remove"></i></a>
 					</div>
 				</div>
+				@if($cek = Session::get('success'))
+					<div class="alert alert-success" style="margin-top:15px">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Berhasil!</strong>
+                        {{ Session::get('success') }}
+                    </div>
+				@endif
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="box">
@@ -52,12 +59,14 @@
 									<thead>
 										<tr>
 											<th width="5%">No</th>
-											<th width="15%">Tanggal Mulai</th>
-											<th width="15%">Tanggal Selesai</th>
-											<th width="40%">Alasan</th>
-											<th width="10%">Range</th>
-											<td>Status</td>
-											<th class='hidden-480 width="20%'>Operasi</th>
+											<th>Tanggal Mulai</th>
+											<th>Tanggal Selesai</th>
+											<th width="10%">No. Karyawan</th>
+											<th width="20%">Nama Lengkap</th>
+											<th width="10%">Alasan</th>
+											<th width="7%">Range</th>
+											<th width="20%">Status</td>
+											<th width="30%">Operasi</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -67,6 +76,8 @@
 												<td><center>{{ $i }}</center></td>
 												<td>{{ date("d M Y", strtotime($cuti->tanggalmulai)) }}</td>
 												<td>{{ date("d M Y", strtotime($cuti->tanggalselesai)) }}</td>
+												<td>{{$cuti->nokaryawan}}</td>
+												<td>{{$cuti->karyawan->user->nama_lengkap}}</td>
 												<td>
 													@if($cuti->alasan == 1)
 		                                                Cuti
@@ -86,19 +97,24 @@
 												</td>
 												<td>{{$cuti->range}}</td>
 												<td>
-													@if($cuti->status == 1)
-														<span class="btn btn-small btn-inverse btn-red">Unapprove</span>
-													@else
+													@if($cuti->status == 0)
+														<span class="btn btn-small btn-inverse">Waiting</span>
+													@elseif(($cuti->status == 2) OR ($cuti->status == 3) OR ($cuti->status == 4) ) 
 														<span class="btn btn-small btn-inverse btn-blue">Approve</span>
+													@else
+														<span class="btn btn-small btn-inverse btn-red">Unapprove</span>
 													@endif
 												</td>
 												<td class='hidden-480'>
 													<center>
 														@if(date('Y-m-d') < $cuti->tanggalmulai)
-															@if($cuti->status == 1)
+															@if($cuti->status == 0)
 																<a href="{{URL::asset('hrdmanager/approve-cuti/'.$cuti->idcuti)}}" class="btn btn-blue" rel="tooltip" title="Approve Cuti"><i class="icon-ok-sign"></i></a>
-															@else
 																<a href="{{URL::asset('hrdmanager/unapprove-cuti/'.$cuti->idcuti)}}" class="btn btn-red" rel="tooltip" title="Unapprove Cuti"><i class=" icon-ban-circle"></i></a>
+															@elseif($cuti->status == 2)
+																<a href="{{URL::asset('hrdmanager/unapprove-cuti/'.$cuti->idcuti)}}" class="btn btn-red" rel="tooltip" title="Unapprove Cuti"><i class=" icon-ban-circle"></i></a>
+															@else
+																<a href="{{URL::asset('hrdmanager/approve-cuti/'.$cuti->idcuti)}}" class="btn btn-blue" rel="tooltip" title="Approve Cuti"><i class="icon-ok-sign"></i></a>
 															@endif
 														@endif														
 														<a href="{{URL::asset('hrdmanager/cuti/'.$cuti->idcuti)}}" class="btn" rel="tooltip" title="Detail Cuti"><i class="icon-ok-sign"></i></a>

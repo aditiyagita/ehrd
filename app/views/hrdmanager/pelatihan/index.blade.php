@@ -1,31 +1,6 @@
 @extends('master')
 
 @section('content')
-
-<script type="text/javascript">
-	 $(document).ready(function() { 
-        $("#okHapus").click(function() {  
-            var i = $("#id").val();
-            var url = "pelatihan/delete/"+i;    
-            $(location).attr('href',url);
-        });  
-        $('.edit').click(function(){
-            var url = $(this).attr('href');
-            $('#dialogEdit').modal('show');
-            $('#dialogEdit').load(url);
-            return false;
-        });
-    });
-
-    function detailAction(data){
-        alert(data);    
-    } 
-	function hapusAction(data){
-        $("#id").val(data);
-        $('#dialogHapus').modal('show');
-    } 
-</script>
-
 <body>
 	@include('menu')
 	</div>
@@ -52,6 +27,13 @@
 						<a href="#"><i class="icon-remove"></i></a>
 					</div>
 				</div>
+				@if($cek = Session::get('success'))
+					<div class="alert alert-success" style="margin-top:15px">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Berhasil!</strong>
+                        {{ Session::get('success') }}
+                    </div>
+				@endif
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="box">
@@ -80,23 +62,32 @@
 												<td>{{ $pelatihan->judul }}</td>
 												<td>{{ $pelatihan->kuota }}</td>
 												<td>
-													@if($pelatihan->status == 3)
+													@if(($pelatihan->status == 3) OR ($pelatihan->status == 5))
 														<span class="label label-satgreen">Sudah Dibayar</span>
 													@elseif($pelatihan->status == 2)	
 														<span class="label">Sudah Disetujui</span>
+													@elseif($pelatihan->status == 4)	
+														<span class="label label-lightred">Tidak Disetujui</span>
 													@else
-														<span class="label label-lightred">Belum Disetujui</span>
+														<span class="label label-lightblue">Belum Disetujui</span>
 													@endif
 												</td>
 												<td class='hidden-480'>
 													<center>
-														@if(($pelatihan->status == 3 ) OR ($pelatihan->status == 2 ))
+														@if(date('Y-m-d') < $pelatihan->tanggalmulai)
+															@if(($pelatihan->status == 3) OR ($pelatihan->status == 5))
 
-														@else
-														<a href="{{ Url::asset('hrdmanager/approve-pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn btn-blue" rel="tooltip" title="Approve"><i class="icon-ok-sign"></i></a>
-														@endif
+															@elseif($pelatihan->status == 2 )
+
+															@elseif($pelatihan->status == 4)
+
+															@else
+															<a href="{{ Url::asset('hrdmanager/approve-pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn btn-blue" rel="tooltip" title="Approve"><i class="icon-ok-sign"></i></a>
+															<a href="{{ Url::asset('hrdmanager/notapprove-pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn btn-red" rel="tooltip" title="Not Approve"><i class="icon-ok-sign"></i></a>
+															@endif
+															
+														@endif	
 														<a href="{{ Url::asset('hrdmanager/pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn" rel="tooltip" title="Detail"><i class="icon-search"></i></a>
-														
 													</center>
 												</td>
 											</tr>
@@ -111,20 +102,5 @@
 			</div>
 		</div>
 	</div>
-
-<div id="dialogHapus" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-	<div class="modal-header">
-	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-	    <h3 id="myModalLabel1">Konfirmasi</h3>
-	</div>
-	<div class="modal-body">
-	    Apakah yakin untuk menghapus?
-	    <input type="hidden" id="id" />
-	</div>
-	<div class="modal-footer">
-	    <button class="btn btn-green" data-dismiss="modal" aria-hidden="true">Tidak</button>
-	    <button class="btn btn-red" id="okHapus">Ya</button>
-	</div>
-</div>
 
 @stop

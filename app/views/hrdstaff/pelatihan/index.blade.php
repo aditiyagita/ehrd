@@ -88,14 +88,16 @@
 														<span class="label label-satgreen">Sudah Dibayar</span>
 													@elseif($pelatihan->status == 2)	
 														<span class="label">Sudah Disetujui</span>
+													@elseif($pelatihan->status == 4)	
+														<span class="label label-lightred">Tidak Disetujui</span>
 													@else
-														<span class="label label-lightred">Belum Disetujui</span>
+														<span class="label label-lightblue">Belum Disetujui</span>
 													@endif
 												</td>
 												<td class='hidden-480'>
 													<center>
 														<a href="{{ Url::asset('hrdstaff/pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn" rel="tooltip" title="Detail"><i class="icon-search"></i></a>
-														<a href="{{ Url::asset('hrdstaff/pelatihan/'.$pelatihan->idpelatihan.'/edit') }}" class="btn btn-green" rel="tooltip" title="Edit"><i class="icon-edit"></i></a>
+														<a href="{{ Url::asset('hrdstaff/pelatihan/'.$pelatihan->idpelatihan.'/edit') }}" class="btn btn-blue" rel="tooltip" title="Edit"><i class="icon-edit"></i></a>
 														<a href="javascript:hapusAction({{ $pelatihan->idpelatihan }})" class="btn btn-red" rel="tooltip" title="Delete"><i class="icon-remove"></i></a>
 													</center>
 												</td>

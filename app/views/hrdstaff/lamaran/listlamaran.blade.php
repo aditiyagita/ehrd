@@ -98,9 +98,9 @@
 														@if($lamaran->status > 0)
 															
 														@else
-															<a href="{{ Url::asset('hrdstaff/lamaran/'.$lamaran->idlamaran.'/edit') }}" class="btn btn-green edit" rel="tooltip" title="Terima Lamaran"><i class="icon-ok-sign"></i></a>
+															<a href="{{ Url::asset('hrdstaff/lamaran/'.$lamaran->idlamaran.'/edit') }}" class="btn btn-blue edit" rel="tooltip" title="Terima Lamaran"><i class="icon-ok-sign"></i></a>
 														@endif
-														<a href="{{ Url::asset('hrdstaff/detail-lamaran/'.$lamaran->idlamaran) }}" class="btn btn-blue" rel="tooltip" title="Detail Resume"><i class="icon-tasks"></i></a>
+														<a href="{{ Url::asset('hrdstaff/detail-lamaran/'.$lamaran->idlamaran) }}" class="btn" rel="tooltip" title="Detail Resume"><i class="icon-tasks"></i></a>
 													</center>
 												</td>
 											</tr>

@@ -81,7 +81,15 @@
                                     </tr>
                                     <tr>
                                         <td><strong>Status</strong></td>
-                                        <td colspan="3">{{ $data['cuti']->status == 1 ? 'Unapprove' : 'Approve' }}</td>
+                                        <td colspan="3">
+                                            @if($data['cuti']->status == 0)
+                                                <span class="btn btn-small btn-inverse">Waiting</span>
+                                            @elseif(($data['cuti']->status == 2) OR ($data['cuti']->status == 3) OR ($data['cuti']->status == 4) ) 
+                                                <span class="btn btn-small btn-inverse btn-blue">Approve</span>
+                                            @else
+                                                <span class="btn btn-small btn-inverse btn-red">Unapprove</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                     	<td colspan=4><center><h4><strong>Detail Cuti</strong></h4></center></td>

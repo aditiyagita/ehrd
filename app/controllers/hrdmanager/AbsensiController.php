@@ -11,7 +11,7 @@ class AbsensiController extends BaseController {
                       )
         );
       	$this->tanda = array('');
-	    $this->title = 'Absensi';
+	    $this->title = 'HRD Manager JC & K - Absensi';
 	    $this->absensi = new Absensi();
 	}
 

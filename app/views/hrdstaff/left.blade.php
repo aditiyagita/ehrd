@@ -1,17 +1,11 @@
 <div id="left">
-			<form action="search-results.html" method="GET" class='search-form'>
-				<div class="search-pane">
-					<input type="text" name="search" placeholder="Search here...">
-					<button type="submit"><i class="icon-search"></i></button>
-				</div>
-			</form>
 			<div class="subnav subnav-hidden">
 				<div class="subnav-title">
 					<a href="#" class='toggle-subnav'><span>Dashboard</span></a>
 				</div>
 				<ul class="subnav-menu">
 					<li>
-						<a href="#">{{ Auth::user()->idjabatan == '1' }}</a>
+						<a href="{{ URL::asset('/') }}">Home</a>
 					</li>
 				</ul>
 			</div>
@@ -66,7 +60,7 @@
 				</ul>
 				<ul class="subnav-menu">
 					<li>
-						<a href="{{ URL::asset('hrdstaff/cuti') }}">Manage Cuti</a>
+						<a href="{{ URL::asset('hrdstaff/cuti') }}">Lihat Cuti</a>
 					</li>
 				</ul>
 			</div>

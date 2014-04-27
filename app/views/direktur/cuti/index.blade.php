@@ -43,7 +43,9 @@
 											<th width="5%">No</th>
 											<th width="15%">Tanggal Mulai</th>
 											<th width="15%">Tanggal Selesai</th>
-											<th width="40%">Alasan</th>
+											<th width="10%">No. Karyawan</th>
+											<th width="35%">Nama Lengkap</th>
+											<th width="10%">Alasan</th>
 											<th width="10%">Range</th>
 											<td>Status</td>
 											<th class='hidden-480 width="20%'>Operasi</th>
@@ -56,6 +58,8 @@
 												<td><center>{{ $i }}</center></td>
 												<td>{{ date("d M Y", strtotime($cuti->tanggalmulai)) }}</td>
 												<td>{{ date("d M Y", strtotime($cuti->tanggalselesai)) }}</td>
+												<td>{{$cuti->nokaryawan}}</td>
+												<td>{{$cuti->karyawan->user->nama_lengkap}}</td>
 												<td>
 													@if($cuti->alasan == 1)
 														Cuti
@@ -112,14 +116,22 @@
                 <select class="span1" id="darihari" name="darihari">
 					<option selected>- Pilih Hari -</option>
 					@for($i=1;$i<32;$i++)
+					@if($i< 10)
+					<option value="0{{$i}}">{{$i}}</option>
+					@else
 					<option value="{{$i}}">{{$i}}</option>
+					@endif
 					@endfor
 				</select>
 				<select class="span2" id="daribulan" name="daribulan">
 					<option selected="">- Pilih Bulan -</option>
 					<?php $i = 1; ?>
 					@foreach($bulan as $b)
+					@if($i< 10)
+					<option value="0{{$i}}">{{$b}}</option>
+					@else
 					<option value="{{$i}}">{{$b}}</option>
+					@endif
 					<?php $i++; ?>
 					@endforeach
 				</select>
@@ -137,14 +149,22 @@
                 <select class="span1" id="sampaihari" name="sampaihari">
 					<option selected>- Pilih Hari -</option>
 					@for($i=1;$i<32;$i++)
+					@if($i< 10)
+					<option value="0{{$i}}">{{$i}}</option>
+					@else
 					<option value="{{$i}}">{{$i}}</option>
+					@endif
 					@endfor
 				</select>
 				<select class="span2" id="sampaibulan" name="sampaibulan">
 					<option selected="">- Pilih Bulan -</option>
 					<?php $i = 1; ?>
 					@foreach($bulan as $b)
+					@if($i< 10)
+					<option value="0{{$i}}">{{$b}}</option>
+					@else
 					<option value="{{$i}}">{{$b}}</option>
+					@endif
 					<?php $i++; ?>
 					@endforeach
 				</select>

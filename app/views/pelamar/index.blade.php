@@ -2,9 +2,11 @@
 
 @section('content')
 		<script type="text/javascript">
-			$('.carousel').carousel({
-			  interval: 3000
-			})
+			$(document).ready(function(){
+				$('.carousel').carousel({
+				  interval: 3000
+				})
+			});
 		</script>
 		<body data-layout="fixed">
 		@include('menu')

@@ -25,12 +25,13 @@
                         <h1>Detail Pelatihan</h1>
                     </div>
                     <div class="pull-right" style="padding-top:15px">
-                        @if( data['pelatihan']->status == 2 )
-                            <a href="{{ Url::asset('hrdmanager/unapprove-pelatihan/'.$data['pelatihan']->idpelatihan.'') }}" class="btn btn-red btn-large" rel="tooltip" title="Unpprove"><i class="icon-ok-sign"></i> Unapprove</a>
+                        @if( $data['pelatihan']->status == 2 )
+                            <a href="{{ Url::asset('hrdmanager/unapprove-pelatihan/'.$data['pelatihan']->idpelatihan) }}" class="btn btn-red btn-large" rel="tooltip" title="Unpprove"><i class="icon-ok-sign"></i> Unapprove</a>
                         @elseif($data['pelatihan']->status == 3 )
                         
                         @else
-                            <a href="{{ Url::asset('hrdmanager/approve-pelatihan/'.$data['pelatihan']->idpelatihan.'') }}" class="btn btn-blue btn-large" rel="tooltip" title="Approve"><i class="icon-ok-sign"></i> Approve</a>
+                            <a href="{{ Url::asset('hrdmanager/approve-pelatihan/'.$data['pelatihan']->idpelatihan) }}" class="btn btn-blue btn-large" rel="tooltip" title="Approve"><i class="icon-ok-sign"></i> Approve</a>
+                            <a href="{{ Url::asset('hrdmanager/notapprove-pelatihan/'.$data['pelatihan']->idpelatihan) }}" class="btn btn-red btn-large" rel="tooltip" title="Not Approve"><i class="icon-ban-circle"></i> Not Approve</a>
                         @endif
                                                         
                     </div>
@@ -68,6 +69,14 @@
                                     <tr>
                                         <td widht=30%><strong>Kuota</strong></td>
                                         <td>{{ $data['pelatihan']->kuota }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td widht=30%><strong>Lokasi</strong></td>
+                                        <td>{{ $data['pelatihan']->tempat }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td widht=30%><strong>No. Rekening</strong></td>
+                                        <td>{{ $data['pelatihan']->norekening == null ? '-' : $data['pelatihan']->norekening }}</td>
                                     </tr>
                                     <tr>
                                         <td widht=30%><strong>Biaya</strong></td>

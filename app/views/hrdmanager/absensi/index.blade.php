@@ -34,9 +34,10 @@
 							<div class="box-title">
 							</div>
 							<div class="box-content nopadding">
-								<table class="table table-hover table-nomargin dataTable table-bordered">
+								<table class="table table-hover table-nomargin dataTable table-bordered usertable">
 									<thead>
 										<tr>
+											<th><input type="checkbox" name="check_all" id="check_all"></th>
 											<th width="10%">No</th>
 											<th width="10%">Tanggal</th>
 											<th width="10%">No Karyawan</th>
@@ -51,14 +52,65 @@
 										<?php $i=1; ?>
 										@foreach($data['absensi'] as $absensi)
 											<tr>
+												<td><input type="checkbox" name="check" id="check"></td>
 												<td><center>{{ $i }}</center></td>
 												<td>{{ date("d M Y", strtotime($absensi->tanggal)) }}</td>
 												<td>{{ $absensi->nokaryawan }}</td>
 												<td>{{ $absensi->karyawan->user->nama_lengkap }}</td>
-												<td>{{ $absensi->kehadiran }}</td>
-												<td>{{ $absensi->telat }}</td>
-												<td>{{ $absensi->pulang }}</td>
-												<td>{{ $absensi->lembur }}</td>
+												<td>
+													<center>
+														@if( $absensi->kehadiran == 'hadir' )
+															<button class="btn btn-mini btn-blue">{{$absensi->kehadiran}}</button>
+														@elseif( $absensi->kehadiran == 'cuti' )
+															<button class="btn btn-mini btn-green">{{$absensi->kehadiran}}</button>
+														@else
+															<button class="btn btn-mini btn-red">{{$absensi->kehadiran}}</button>
+														@endif
+													</center>
+												</td>
+												<td>
+													<center>
+														@if( $absensi->kehadiran == 'cuti')
+															<button class="btn btn-mini btn-green"><i class="icon-minus"></i></button>
+														@else
+															@if( $absensi->telat == 'check' )
+																<button class="btn btn-mini btn-blue"><i class="icon-ok"></i></button>
+															@elseif( $absensi->telat == '-' )
+																<button class="btn btn-mini btn-red"><i class="icon-remove"></i></button>
+															@else
+																<button class="btn btn-mini btn-orange">{{$absensi->telat}}</button>
+															@endif
+														@endif
+													</center>
+												</td>
+												<td>
+													<center>
+														@if( $absensi->kehadiran == 'cuti')
+															<button class="btn btn-mini btn-green"><i class="icon-minus"></i></button>
+														@else
+															@if( $absensi->pulang == 'check' )
+																<button class="btn btn-mini btn-blue"><i class="icon-ok"></i></button>
+															@elseif( $absensi->pulang == '-' )
+																<button class="btn btn-mini btn-red"><i class="icon-remove"></i></button>
+															@else
+																<button class="btn btn-mini btn-orange">{{$absensi->pulang}}</button>
+															@endif
+														@endif
+													</center>
+												</td>
+												<td>
+													<center>
+														@if( $absensi->kehadiran == 'cuti')
+															<button class="btn btn-mini btn-green"><i class="icon-minus"></i></button>
+														@else
+															@if( $absensi->lembur == 'check' OR $absensi->lembur == '-' )
+																<button class="btn btn-mini btn-red"><i class="icon-remove"></i></button>
+															@else
+																<button class="btn btn-mini btn-blue">{{$absensi->lembur}}</button>
+															@endif
+														@endif
+													</center>
+												</td>
 											</tr>
 											<?php $i++; ?>
 										@endforeach

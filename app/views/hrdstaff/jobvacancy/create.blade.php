@@ -131,7 +131,7 @@ function checkSize(max_img_size)
 									<div class='form-wysiwyg'>
 										 <textarea name="ck" class='ckeditor' rows="5"></textarea> 
 										<div style="padding-top:10px; float:right;">
-											<button type="submit" class="btn btn-large btn-primary">Save changes</button>
+											<button type="submit" class="btn btn-large btn-brown">Save changes</button>
 											<button type="button" class="btn btn-large">Cancel</button>
 										</div>
 									</div>

@@ -33,7 +33,7 @@
 							<i class="icon-angle-right"></i>
 						</li>
 						<li>
-							<a href="{{Url::asset('hrdstaff/Pelatihan')}}">Pelatihan</a>
+							<a href="{{Url::asset('hrdstaff/pelatihan')}}">Pelatihan</a>
 							<i class="icon-angle-right"></i>
 						</li>
 						<li>
@@ -78,9 +78,21 @@
 										</div>
 									</div>									
 									<div class="control-group">
-										<label for="biaya" class="control-label">No. Rekeing</label>
+										<label for="biaya" class="control-label">No. Rekening</label>
 										<div class="controls">
-											<input type="number" name="norekeing" id="norekeing" class="input-block-level" min="1" max="9999999999999" required>
+											<input type="number" name="norekening" id="norekening" class="input-block-level" min="1" max="9999999999999" required>
+										</div>
+									</div>									
+									<div class="control-group">
+										<label for="atasnama" class="control-label">Atas Nama</label>
+										<div class="controls">
+											<input type="text" name="atasnama" id="atasnama" class="input-block-level" required>
+										</div>
+									</div>									
+									<div class="control-group">
+										<label for="biaya" class="control-label">Nama Bank</label>
+										<div class="controls">
+											<input type="text" name="namabank" id="namabank" class="input-block-level" required>
 										</div>
 									</div>
 									<div class="control-group">
@@ -115,7 +127,7 @@
 									<div class='form-wysiwyg'>
 										 <textarea name="ck" class='ckeditor' rows="5"></textarea> 
 										<div style="padding-top:10px; float:right;">
-											<button type="submit" class="btn btn-large btn-primary">Save changes</button>
+											<button type="submit" class="btn btn-large btn-brown">Save changes</button>
 											<button type="button" class="btn btn-large">Cancel</button>
 										</div>
 									</div>

@@ -29,13 +29,15 @@ class Cuti extends Eloquent {
 		if ($id != null) {
             return self::find($id);
         }else{
-            return self::all();
+            //return self::all();
+            return self::whereRaw('status != ? OR (status = ? AND tanggalmulai > ?)', array(0, 0, self::getDateFormat()))->get();
         }
 	}
 
 	public function getListCuti($value)
 	{
-		return self::join('karyawan', 'pengganti', '=', 'karyawan.nokaryawan')
+		return self::select(DB::raw('cuti.idcuti, cuti.nokaryawan, cuti.tanggalmulai, cuti.tanggalselesai, cuti.range, cuti.alasan, cuti.suratdokter, cuti.status, users.nama_lengkap'))
+				->join('karyawan', 'pengganti', '=', 'karyawan.nokaryawan')
 				->join('users', 'users.iduser', '=', 'karyawan.iduser')
 				->where('cuti.nokaryawan', $value)->get();
 	}
@@ -50,7 +52,9 @@ class Cuti extends Eloquent {
 
 	public function cetakLaporan($value)
 	{
-		return self::whereBetween('tanggalmulai', array($value['tanggaldari'], $value['tanggalsampai']))->get();
+		//return self::whereRaw('tanggalmulai => ? AND tanggalmulai =< ?', array($value['tanggaldari'], $value['tanggalsampai']));
+		return self::select('*')->whereBetween('tanggalmulai', array($value['tanggaldari'], $value['tanggalsampai']))->where('status', 2)->get();
+		//return self::all();
 	}
 
 	public function simpan($input){
@@ -60,7 +64,7 @@ class Cuti extends Eloquent {
 		$this->alasan = $input['alasan'];
 		$this->suratdokter = $input['suratdokter'];
 		$this->pengganti = $input['pengganti'];
-		$this->status = 1;
+		$this->status = 0;
 		$this->range = $input['range'];
 		$this->save();
 	}
@@ -73,4 +77,22 @@ class Cuti extends Eloquent {
     {
     	self::find($value['idcuti'])->update($value);
     }
+
+    public function getNotif()
+	{
+		return self::where('status', 0)->where('tanggalmulai', '>', self::getDateFormat())->get();
+	}
+
+	public function getNotifKaryawan($value)
+	{ 
+		return self::whereRaw('status IN (?,?) AND nokaryawan = ?', array(2,4,$value))->where('tanggalmulai', '>', self::getDateFormat())->get();
+	}
+
+	public function updateNotifKaryawan($value)
+	{
+		$user =  DB::table('cuti')
+					->whereRaw('nokaryawan =  ? AND status IN (?,?)', array($value,2,4))
+					->update(array('status' => 3));
+
+	}
 }

@@ -22,7 +22,9 @@ Route::get('register', 'defaultview\RegisterController@index');
 Route::post('do-register', 'defaultview\RegisterController@do_register');
 
 Route::get('myprofile', 'defaultview\RegisterController@updateProfil');
-Route::post('update-myprofile', 'defaultview\RegisterController@storeUpdate');
+Route::post('updatemyprofile', 'defaultview\RegisterController@storeUpdate');
+
+Route::get('updatenotification', 'defaultview\RegisterController@notification');
 
 
 Route::get('login', function(){
@@ -46,37 +48,37 @@ Route::get('logout', 'LoginController@logout');
 
 
 Route::filter('hakHrdStaff', function(){
-    if ((Session::has('user')) && (Auth::user()->idjabatan != '1')){
+    if ((Auth::user()->idjabatan != '1')){
         return Redirect::to('/');
     }
 });
 Route::filter('hakHrdManager', function(){
-    if ((Session::has('user')) && (Auth::user()->idjabatan != '2')){
+    if ((Auth::user()->idjabatan != '2')){
         return Redirect::to('/');
     }
 });
 Route::filter('hakDirektur', function(){
-    if ((Session::has('user')) && (Auth::user()->idjabatan != '3')){
+    if ((Auth::user()->idjabatan != '3')){
         return Redirect::to('/');
     }
 });
 Route::filter('hakHrga', function(){
-    if ((Session::has('user')) && (Auth::user()->idjabatan != '4')){
+    if ((Auth::user()->idjabatan != '4')){
         return Redirect::to('/');
     }
 });
 Route::filter('hakKeuangan', function(){
-    if ((Session::has('user')) && (Auth::user()->idjabatan != '5')){
+    if ((Auth::user()->idjabatan != '5')){
         return Redirect::to('/');
     }
 });
 Route::filter('hakKaryawan', function(){
-    if ((Session::has('user')) && (Auth::user()->idjabatan != '6')){
+    if ((Auth::user()->idjabatan != '6')){
         return Redirect::to('/');
     }
 });
 Route::filter('hakPelamar', function(){
-    if ((Session::has('user')) && (Auth::user()->idjabatan != '7')){
+    if ((Auth::user()->idjabatan != '7')){
         return Redirect::to('/');
     }
 });
@@ -131,9 +133,11 @@ Route::group(['prefix' => 'hrdmanager', 'before' => 'auth|hakHrdManager'], funct
     Route::get('pelatihan/delete/{id}', 'hrdmanager\PelatihanController@destroy');
     Route::get('approve-pelatihan/{id}', 'hrdmanager\PelatihanController@approve');
     Route::get('unapprove-pelatihan/{id}', 'hrdmanager\PelatihanController@unapprove');
+    Route::get('notapprove-pelatihan/{id}', 'hrdmanager\PelatihanController@notapprove');
 
     Route::resource('pengunduran-diri', 'hrdmanager\PengunduranDiriController');
     Route::get('pengunduran-diri/{id}/approve', 'hrdmanager\PengunduranDiriController@approve');
+    Route::get('pengunduran-diri/{id}/unapprove', 'hrdmanager\PengunduranDiriController@unapprove');
 
     Route::get('approve-cuti/{id}', 'hrdmanager\CutiController@approveCuti');
     Route::get('unapprove-cuti/{id}', 'hrdmanager\CutiController@unapproveCuti');

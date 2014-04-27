@@ -25,7 +25,7 @@
 					        }
 					        if(x == 0){
 					        	x++;
-					        	var addKtp = "<input type='text' name='noktp' placeholder='No. KTP' class='input-block-level' required>";
+					        	var addKtp = "<input type='number' name='noktp' placeholder='No. KTP' class='input-block-level' required>";
 					          	$("#addisi").append("<div id='konten'><div class='control-group'><label for='noktp' class='control-label'>No. KTP</label><div class='controls'>"+addKtp+"</div></div></div>");
 					          
 					        }
@@ -33,7 +33,7 @@
 			            	if(i == 0){
 			            	i++;	
 			            	var addWarganegara = "<input type='text' name='warganegara' placeholder='Warga Negara' class='input-block-level' required>";
-			            	var addPassport = "<input type='text' name='nopassport' placeholder='No. Passport' class='input-block-level' required>";
+			            	var addPassport = "<input type='number' name='nopassport' placeholder='No. Passport' class='input-block-level' required>";
 			            	var appWarganegara = "<div id='konten'><div class='control-group'><label for='warganegara' class='control-label'>Warga Negara</label><div class='controls'>"+addWarganegara+"</div></div></div>";
 			            	var appPassport = "<div id='konten'><div class='control-group'><label for='passport' class='control-label'>No. Passport</label><div class='controls'>"+addPassport+"</div></div></div>";
 			            	$("#addisi").append("<div id='kontens'>"+appWarganegara+appPassport+"</div>");
@@ -71,6 +71,13 @@
 							<a href="#"><i class="icon-remove"></i></a>
 						</div>
 					</div>
+					@if($cek = Session::get('success'))
+						<div class="alert alert-success" style="margin-top:15px">
+	                        <button type="button" class="close" data-dismiss="alert">×</button>
+	                        <strong>Berhasil!</strong>
+	                        {{ Session::get('success') }}
+	                    </div>
+					@endif
 					<div class="row-fluid">
 						<div class="span9">
 							{{ Form::open(array('url' => 'do-register', 'class' => 'form-vertical form-column', 'id' => '')) }}
@@ -116,26 +123,26 @@
 										<div class="control-group">
 											<label for="notelp" class="control-label">No. Telp</label>
 											<div class="controls">
-												<input type="text" name="no_telp" id="notelp" placeholder="No Telpon" class="input-block-level" required>
+												<input type="number" name="no_telp" id="notelp" placeholder="No Telpon" class="input-block-level" min="1" max="999999999999"required>
 											</div>
 										</div>
 										<div class="control-group">
 											<label for="alamat" class="control-label">Alamat</label>
 											<div class="controls">
-												<textarea name="alamat" id="textarea" rows="5" class="input-block-level"></textarea>
+												<textarea name="alamat" id="textarea" rows="5" class="input-block-level" required></textarea>
 											</div>
 										</div>
 										<div class="control-group">
 											<label for="kodepos" class="control-label">Kode Pos</label>
 											<div class="controls">
-												<input type="text" name="kode_pos" id="kodepos" placeholder="Kode Pos" class="input-block-level">
+												<input type="number" name="kode_pos" id="kodepos" placeholder="Kode Pos" class="input-block-level" min="1" max="999999999999" required>
 											</div>
 										</div>
 										<div class="control-group">
 											<label for="kewarganegaraan" class="control-label">Kewarganegaraan</label>
 											<div class="controls">
 												<label class='radio'>
-													<input type="radio" id="kewarganegaraan" name="kewarganegaraan" value=1> Warga Negara Indonesia
+													<input type="radio" id="kewarganegaraan" name="kewarganegaraan" value=1 required> Warga Negara Indonesia
 												</label>
 												<label class='radio'>
 													<input type="radio" id="kewarganegaraan" name="kewarganegaraan" value=2> Warga Negara Asing
@@ -146,7 +153,7 @@
 										<div class="control-group">
 											<label for="agama" class="control-label">Agama</label>
 											<div class="controls">
-												<select name="agama" id="agama" class='input-block-level'>
+												<select name="agama" id="agama" class='input-block-level' required>
 													<option selected>- Pilih Agama -</option>
 													<?php $i=1; ?>
 													@foreach($data['agama'] as $agama)
@@ -161,32 +168,32 @@
 										<div class="control-group">
 											<label for="namalengkap" class="control-label">Nama Lengkap</label>
 											<div class="controls">
-												<input type="text" name="nama_lengkap" id="namalengkap" placeholder="Nama Lengkap" class="input-block-level">
+												<input type="text" name="nama_lengkap" id="namalengkap" placeholder="Nama Lengkap" class="input-block-level" required>
 											</div>
 										</div>
 										<div class="control-group">
 											<label for="nohp" class="control-label">No. Handphone</label>
 											<div class="controls">
-												<input type="text" name="no_hp" id="nohp" placeholder="No. Handphone" class="input-block-level">
+												<input type="number" name="no_hp" id="nohp" placeholder="No. Handphone" class="input-block-level" min="1" max="999999999999" required>
 											</div>
 										</div>
 										<div class="control-group">
 											<label for="tempatlahir" class="control-label">Tempat Lahir</label>
 											<div class="controls">
-												<input type="text" name="tempat_lahir" id="tempatlahir" placeholder="Tempat Lahir" class="input-block-level"><br>
+												<input type="text" name="tempat_lahir" id="tempatlahir" placeholder="Tempat Lahir" class="input-block-level" required><br>
 											</div>
 										</div>
 										<div class="control-group">
 											<label for="tanggallahir" class="control-label">Tanggal Lahir</label>
 											<div class="controls">
-												<input type="text" name="tanggal_lahir" id="tanggallahir" class="input-block-level datepick">
+												<input type="text" name="tanggal_lahir" id="tanggallahir" class="input-block-level datepick" required>
 											</div>
 										</div>
 										<div class="control-group">
 											<label for="jeniskelamin" class="control-label">Jenis Kelamin</label>
 											<div class="controls">
 												<label class='radio'>
-													<input type="radio" name="jenis_kelamin" value=1> Pria
+													<input type="radio" name="jenis_kelamin" value=1 required> Pria
 												</label>
 												<label class='radio'>
 													<input type="radio" name="jenis_kelamin" value=2> Wanita
@@ -196,7 +203,7 @@
 										<div class="control-group">
 											<label for="statuskawin" class="control-label">Status Perkawinan</label>
 											<div class="controls">
-												<select name="status_kawin" id="statuskawin" class='input-block-level'>
+												<select name="status_kawin" id="statuskawin" class='input-block-level' required>
 													<option selected>- Pilih Status -</option>
 													<?php $i=1; ?>
 													@foreach($data['statuskawin'] as $stat)
@@ -210,7 +217,7 @@
 											<label for="kacamata" class="control-label">Apakah Anda Memakai Kacamata?</label>
 											<div class="controls">
 												<label class='radio'>
-													<input type="radio" name="kacamata" value=1> Ya
+													<input type="radio" name="kacamata" value=1 checked> Ya
 												</label>
 												<label class='radio'>
 													<input type="radio" name="kacamata" value=2> Tidak
@@ -220,7 +227,7 @@
 									</div>
 									<div class="span12">
 										<div class="form-actions">
-											<button type="submit" class="btn btn-primary">Save changes</button>
+											<button type="submit" class="btn btn-brown">Save changes</button>
 											<button type="button" class="btn">Cancel</button>
 										</div>
 									</div>

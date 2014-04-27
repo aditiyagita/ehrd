@@ -11,7 +11,7 @@
 				</div>
 				<ul class="subnav-menu">
 					<li>
-						<a href="#">{{ Auth::user()->idjabatan == '1' }}</a>
+						<a href="{{ URL::asset('/') }}">Home</a>
 					</li>
 				</ul>
 			</div>

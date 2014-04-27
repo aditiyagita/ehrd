@@ -6,9 +6,12 @@
 	p{
 		padding: 5px;
 	}
+	table .isi{
+		
+	}
 </style>
 <center>
-	<table width=100%>
+	<table width=100% class="isi">
 		<tr>
 			<td width=15%><img src="{{ public_path().'/assets/img/hvh.jpg' }}"/></td>
 			<td align="right"><h3>Permohonan<br>Cuti/Izin Tidak Masuk Kerja</h3></td>

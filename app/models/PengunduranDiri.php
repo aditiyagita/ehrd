@@ -32,6 +32,11 @@ class PengunduranDiri extends Eloquent {
         }
 	}
 
+	public function getNotif()
+	{
+		return self::where('status', 0)->get();
+	}
+
 	public function cetakLaporan($value)
 	{
 		return self::whereBetween('tanggalsurat', array($value['tanggaldari'], $value['tanggalsampai']))->get();
@@ -47,7 +52,7 @@ class PengunduranDiri extends Eloquent {
 		$this->kepada = $input['kepada'];
 		$this->tanggalsurat = date('Y-m-d', strtotime($input['tanggalsurat']));
 		$this->isi = $input['ck'];
-		$this->status = 1;
+		$this->status = 0;
 		$this->save();
 	}
 

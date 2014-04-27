@@ -67,7 +67,7 @@
 												</td>
 												<td class='hidden-480'>
 													<center>
-														<a href="{{ Url::asset('hrdstaff/list-lamaran/'.$jobvacancy->idlowongan) }}" class="btn btn-green" rel="tooltip" title="Terima Lamaran"><i class="icon-filter"></i></a>
+														<a href="{{ Url::asset('hrdstaff/list-lamaran/'.$jobvacancy->idlowongan) }}" class="btn" rel="tooltip" title="Terima Lamaran"><i class="icon-filter"></i></a>
 													</center>
 												</td>
 											</tr>
