@@ -20,8 +20,9 @@ class DashboardController extends BaseController {
 	}
 
   public function index(){
-      if (Session::has('user')) {
-          Auth::login(Session::get('user'));
+      //if (Session::has('user')) {
+      //    Auth::login(Session::get('user'));
+      if(Auth::check()){
           if (Auth::user()->idjabatan == '1') {
               return Redirect::intended('hrdstaff');
           } elseif (Auth::user()->idjabatan == '2') {

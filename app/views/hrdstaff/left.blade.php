@@ -41,16 +41,6 @@
 			</div>
 			<div class="subnav subnav-hidden">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Absensi</span></a>
-				</div>
-				<ul class="subnav-menu">
-					<li>
-						<a href="{{ URL::asset('hrdstaff/absensi') }}">List Absensi</a>
-					</li>
-				</ul>
-			</div>
-			<div class="subnav subnav-hidden">
-				<div class="subnav-title">
 					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Cuti</span></a>
 				</div>
 				<ul class="subnav-menu">

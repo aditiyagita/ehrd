@@ -78,8 +78,16 @@
                                         <td>{{ $data['pelatihan']->biaya == null ? '-' : $data['pelatihan']->biaya }}</td>
                                     </tr>
                                     <tr>
-                                        <td widht=30%><strong>DP</strong></td>
-                                        <td>{{ $data['pelatihan']->dp == null ? '-' : $data['pelatihan']->dp }}</td>
+                                        <td widht=30%><strong>No. Rekening</strong></td>
+                                        <td>{{ $data['pelatihan']->norekening == null ? '-' : $data['pelatihan']->norekening }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td widht=30%><strong>Nama Bank</strong></td>
+                                        <td>{{ $data['pelatihan']->namabank == null ? '-' : $data['pelatihan']->namabank }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td widht=30%><strong>Atas Nama</strong></td>
+                                        <td>{{ $data['pelatihan']->atasnama == null ? '-' : $data['pelatihan']->atasnama }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan=2>{{ $data['pelatihan']->uraian }}</td>
@@ -92,3 +100,5 @@
             </div>
         </div></div>
 @stop
+
+

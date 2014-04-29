@@ -30,7 +30,7 @@ class Pelatihan extends Eloquent {
 	}
 
 	public function getPelatihanKaryawan(){
-		return self::where('status', 3)->get();
+		return self::where('status', 3)->paginate(5);
 	}
 
 	public function getNotif()

@@ -32,46 +32,65 @@
 					<div class="span12">
 						<div class="box">
 							<div class="box-title">
+								
 							</div>
 							<div class="box-content nopadding">
-								<table class="table table-hover table-nomargin dataTable table-bordered">
-									<thead>
-										<tr>
-											<th width="5%">No</th>
-											<th width="10%">Tanggal Mulai</th>
-											<th width="10%">Tanggal Selesai</th>
-											<th width="40%">Judul</th>
-											<th width="10%">Kuota</th>
-											<th width="10%">Sisa</th>
-											<th class='hidden-480 width="20%'>Detail</th>
-										</tr>
-									</thead>
-									<tbody>
+								
+								<div class="search-results">
+									<ul>
 										<?php $i=1; ?>
-										@foreach($data['pelatihan'] as $pelatihan)
-										<?php 
-											$peserta = new Peserta();
-											$jmlpeserta[$i] = $peserta->cekJum($pelatihan->idpelatihan);
-										?>
-											<tr>
-												<td><center>{{ $i }}</center></td>
-												<td>{{ date("d M Y", strtotime($pelatihan->tanggalmulai)) }}</td>
-												<td>{{ date("d M Y", strtotime($pelatihan->tanggalselesai)) }}</td>
-												<td>{{ $pelatihan->judul }}</td>
-												<td>{{ $pelatihan->kuota }}</td>
-												<td>{{ $sisa = ($pelatihan->kuota)-count($jmlpeserta[$i]) }} </td>
-												<td class='hidden-480'>
-													@if($sisa > 0)
-													<center>
-														<a href="{{ Url::asset('karyawan/pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn" rel="tooltip" title="Detail"><i class="icon-search"></i></a>
-													</center>
-													@endif
-												</td>
-											</tr>
-											<?php $i++; ?>
-										@endforeach
-									</tbody>
-								</table>
+										@if( count($data['pelatihan']) > 0 ) 
+											@foreach($data['pelatihan'] as $pelatihan)
+												<?php 
+													$peserta = new Peserta();
+													$jmlpeserta[$i] = $peserta->cekJum($pelatihan->idpelatihan);
+												?>
+												@if($pelatihan->tanggalmulai > date('Y-m-d'))
+												<li>
+													<div class="thumbnail">
+														<img src="http://www.placehold.it/80" alt="">
+													</div>
+													<div class="search-info">
+														@if(($pelatihan->kuota)-count($jmlpeserta[$i]) > 0)
+															<a href="{{ Url::asset('karyawan/pelatihan/'.$pelatihan->idpelatihan.'') }}">{{ $pelatihan->judul }}</a>
+														@else
+															<a href="#modal-1" role="button"data-toggle="modal">{{ $pelatihan->judul }}</a>
+														@endif
+														<p class="url">{{ date("d M Y", strtotime($pelatihan->tanggalmulai)) }} - {{ date("d M Y", strtotime($pelatihan->tanggalmulai)) }} di {{ $datass = $pelatihan->tempat == '' ? '-' : $pelatihan->tempat}}. <strong>Sisa Kuota: {{ $sisa = ($pelatihan->kuota)-count($jmlpeserta[$i]) }}</strong></p>
+														<?php $isi = str_replace(array('<h1>','</h1>','<h2>','</h2>','</br>','<ol>','</ol>','<li>','</li>','<p>','</p>'), ' ', $pelatihan->uraian); ?>
+														<p>
+															@if(strlen($isi) > 300)
+																{{ substr($isi, 0,300) }}
+															@else
+																{{ $isi }}
+															@endif
+														</p>
+													</div>
+												</li>
+												@endif
+												<?php $i++; ?>
+											@endforeach
+										@else
+										<li>Belum Ada Pelatihan</li>
+										@endif
+									</ul>
+								</div>
+								<div class="highlight-toolbar bottom">
+									<div class="pull-left">
+										<div class="btn-toolbar">
+											<div class="btn-group">
+												<div class="pagination pagination-custom">
+													{{ $data['pelatihan']->links() }}
+												</div>
+											</div>	
+										</div>
+									</div>
+									<div class="pull-right">
+										<div class="btn-group">
+											<span>Showing results <strong>1-25</strong> of <strong>348</strong></span>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -79,5 +98,20 @@
 			</div>
 		</div>
 	</div>
+
+
+<div id="modal-1" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel1">Oppss...</h3>
+    </div>
+    <div class="modal-body">
+        <p>Maaf, Kuota Pelatihan Sudah Penuh.</p>
+    </div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div>
+</div>
+
 
 @stop

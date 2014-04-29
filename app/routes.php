@@ -11,6 +11,15 @@
 |
 */
 
+App::missing(function($exception)
+    {
+
+        // shows an error page (app/views/error.blade.php)
+        // returns a page not found error
+        return 'not found';
+    });
+
+
 Route::get('/', 'defaultview\DashboardController@index');
 
 Route::resource('job-vacancy', 'defaultview\JobController');
@@ -113,8 +122,6 @@ Route::group(['prefix' => 'hrdstaff', 'before' => 'auth|hakHrdStaff'], function(
     Route::get('unapprove-cuti/{id}', 'hrdstaff\CutiController@unapproveCuti');
 
     Route::resource('setting-cuti', 'hrdstaff\SettingCutiController');
-
-    Route::resource('absensi', 'hrdstaff\AbsensiController');
 
     Route::get('lamaran', 'hrdstaff\LamaranController@index');
     Route::get('lamaran/{id}/edit', 'hrdstaff\LamaranController@edit');

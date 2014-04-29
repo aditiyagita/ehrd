@@ -59,7 +59,8 @@
 											<div class="controls">
 												<input type="text" name="tanggalmulai" id="tanggalmulai" class="input-block-level datepick" required>
 											</div>
-										</div><div class="control-group">
+										</div>
+										<div class="control-group">
 											<label for="alasan" class="control-label">Alasan</label>
 											<div class="controls">
 												<select name="alasan" id="alasan" class='input-block-level' required>
@@ -70,6 +71,21 @@
 													<option value="4">Berduka Cita</option>
 													<option value="5">Pernikahan</option>
 													<option value="6">Khitanan/Baptis</option>
+												</select>
+											</div>
+										</div>
+										<div class="control-group">
+											<label for="pengganti" class="control-label">Pengganti</label>
+											<div class="controls">
+												<select name="pengganti" id="pengganti" class='select2-me input-block-level' required>
+													<option value="" selected>-Pilih Pengganti-</option>
+													@foreach($data['karyawan'] as $karyawan)
+													@if(($karyawan->user->iduser == Auth::user()->iduser) OR $karyawan->user->idjabatan <> 6 OR $karyawan->status == 1)
+
+													@else
+													<option value="{{$karyawan->nokaryawan}}">{{ $karyawan->user->nama_lengkap}}</option>
+													@endif
+													@endforeach
 												</select>
 											</div>
 										</div>
@@ -91,28 +107,21 @@
 													<input type="radio" name="suratdokter" value=2> Tidak Ada
 												</label>
 											</div>
-										</div>
+										</div> 
 										<div class="control-group">
-											<label for="pengganti" class="control-label">Pengganti</label>
 											<div class="controls">
-												<select name="pengganti" id="pengganti" class='select2-me input-block-level' required>
-													<option value="" selected>-Pilih Pengganti-</option>
-													@foreach($data['karyawan'] as $karyawan)
-													@if(($karyawan->user->iduser == Auth::user()->iduser) OR $karyawan->user->idjabatan <> 6 OR $karyawan->status == 1)
-
-													@else
-													<option value="{{$karyawan->nokaryawan}}">{{ $karyawan->user->nama_lengkap}}</option>
-													@endif
-													@endforeach
-												</select>
+												
 											</div>
-										</div>
+										</div> 				
 									</div>
 									<div class="span12">
-										<div class="form-actions">
-											<button type="submit" class="btn btn-primary">Buat Surat Cuti</button>
-											<button type="button" class="btn">Cancel</button>
+										<div class="form-actions" >
+											
 										</div>
+									</div>
+									<div style="float:right">
+										<button type="submit" class="btn btn-brown btn-large">Buat Surat Cuti</button>
+											<button type="button" class="btn btn-large">Cancel</button>
 									</div>
 								{{Form::close()}}
 							</div>
@@ -125,3 +134,4 @@
 
 
 @stop
+

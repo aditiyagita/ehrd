@@ -61,8 +61,8 @@
 							            </div>
 							        </div>
 							        <div class="form-actions">
-										<button type="submit" class="btn btn-brown">Save changes</button>
-										<button type="button" class="btn">Cancel</button>
+										<button type="submit" class="btn btn-brown btn-large">Cetak Laporan</button>
+										<button type="button" class="btn btn-large">Cancel</button>
 									</div>
 								{{Form::close()}}
 							</div>

@@ -76,12 +76,15 @@ table.laporan tbody td{
 	<br><br>
 	<table width=100%>
 		<tr>
-			<td><center>Mengetahui,</center></td><td width=65%></td>
+			<td><center>Mengetahui,</center></td><td width=67%></td>
+		</tr>
+		<tr>
+			<td><center>HRD Manager</center></td><td width=67%></td>
 		</tr>
 		<tr>
 			<td><br><br><br><br></td><td></td>
 		</tr>
 		<tr>
-			<td><strong>Andreas Harjanto Budiman</strong><br><br><br><br></td><td></td>
+			<td colspan="2"><strong>Andreas Harjanto Budiman</strong><br><br><br><br></td>
 		</tr>
 	</table>
