@@ -11,7 +11,7 @@ class PelatihanController extends BaseController {
                       ),
     		);
     	$this->tanda = $this->tanda = array('');
-	    $this->title = 'Pelatihan';
+	    $this->title = 'Direktur JC & K - Pelatihan';
 	    $this->department = new Department();
 	    $this->pelatihan = new Pelatihan();
 	}

@@ -48,7 +48,9 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+	//Log::error($exception);
+
+	return View::make('notfound');
 
 	//return "Ooopsss... Not Found Page :)";
 });

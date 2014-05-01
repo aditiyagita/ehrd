@@ -22,7 +22,7 @@
             <div class="control-group">
                 <label class="control-label">No. Rekening</label>
                 <div class="controls">
-                    <input class="input-block-level" type="text" name="norekening" required>
+                    <input class="input-block-level" type="number" name="norekening" required>
                 </div>
             </div>
             <div class="control-group">
@@ -48,19 +48,19 @@
             <div class="control-group">
                 <label class="control-label">Gaji</label>
                 <div class="controls">
-                    <input class="input-block-level" type="text" name="gaji" required>
+                    <input class="input-block-level" type="number" name="gaji" required>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Tunjangan Jabatan</label>
                 <div class="controls">
-                    <input class="input-block-level" type="text" name="tunjanganjabatan" required>
+                    <input class="input-block-level" type="number" name="tunjanganjabatan" required>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Tunjangan Harian</label>
                 <div class="controls">
-                    <input class="input-block-level" type="text" name="tunjanganharian" required>
+                    <input class="input-block-level" type="number" name="tunjanganharian" required>
                 </div>
             </div>
         </div>

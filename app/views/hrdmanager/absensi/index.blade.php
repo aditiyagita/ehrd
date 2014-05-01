@@ -28,94 +28,62 @@
 						<a href="#"><i class="icon-remove"></i></a>
 					</div>
 				</div>
+				@if($cek = Session::get('success'))
+					<div class="alert alert-success" style="margin-top:15px">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Berhasil...</strong>
+                        {{ Session::get('success') }}
+                    </div>
+				@elseif($cek = Session::get('warning'))
+					<div class="alert" style="margin-top:15px">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Oopss...</strong>
+                        {{ Session::get('warning') }}
+                    </div>
+                @elseif($cek = Session::get('info'))
+					<div class="alert alert-info" style="margin-top:15px">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Info...</strong>
+                        {{ Session::get('info') }}
+                    </div>
+				@endif
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="box">
 							<div class="box-title">
 							</div>
-							<div class="box-content nopadding">
-								<table class="table table-hover table-nomargin dataTable table-bordered usertable">
-									<thead>
-										<tr>
-											<th><input type="checkbox" name="check_all" id="check_all"></th>
-											<th width="10%">No</th>
-											<th width="10%">Tanggal</th>
-											<th width="10%">No Karyawan</th>
-											<th width="40%">Nama</th>
-											<th width="10%">Kehadiran</th>
-											<th width="10%">Masuk</th>
-											<th width="10%">Keluar</th>
-											<th width="10%">Lembur</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php $i=1; ?>
-										@foreach($data['absensi'] as $absensi)
-											<tr>
-												<td><input type="checkbox" name="check" id="check"></td>
-												<td><center>{{ $i }}</center></td>
-												<td>{{ date("d M Y", strtotime($absensi->tanggal)) }}</td>
-												<td>{{ $absensi->nokaryawan }}</td>
-												<td>{{ $absensi->karyawan->user->nama_lengkap }}</td>
-												<td>
-													<center>
-														@if( $absensi->kehadiran == 'hadir' )
-															<button class="btn btn-mini btn-blue">{{$absensi->kehadiran}}</button>
-														@elseif( $absensi->kehadiran == 'cuti' )
-															<button class="btn btn-mini btn-green">{{$absensi->kehadiran}}</button>
-														@else
-															<button class="btn btn-mini btn-red">{{$absensi->kehadiran}}</button>
-														@endif
-													</center>
-												</td>
-												<td>
-													<center>
-														@if( $absensi->kehadiran == 'cuti')
-															<button class="btn btn-mini btn-green"><i class="icon-minus"></i></button>
-														@else
-															@if( $absensi->telat == 'check' )
-																<button class="btn btn-mini btn-blue"><i class="icon-ok"></i></button>
-															@elseif( $absensi->telat == '-' )
-																<button class="btn btn-mini btn-red"><i class="icon-remove"></i></button>
-															@else
-																<button class="btn btn-mini btn-orange">{{$absensi->telat}}</button>
-															@endif
-														@endif
-													</center>
-												</td>
-												<td>
-													<center>
-														@if( $absensi->kehadiran == 'cuti')
-															<button class="btn btn-mini btn-green"><i class="icon-minus"></i></button>
-														@else
-															@if( $absensi->pulang == 'check' )
-																<button class="btn btn-mini btn-blue"><i class="icon-ok"></i></button>
-															@elseif( $absensi->pulang == '-' )
-																<button class="btn btn-mini btn-red"><i class="icon-remove"></i></button>
-															@else
-																<button class="btn btn-mini btn-orange">{{$absensi->pulang}}</button>
-															@endif
-														@endif
-													</center>
-												</td>
-												<td>
-													<center>
-														@if( $absensi->kehadiran == 'cuti')
-															<button class="btn btn-mini btn-green"><i class="icon-minus"></i></button>
-														@else
-															@if( $absensi->lembur == 'check' OR $absensi->lembur == '-' )
-																<button class="btn btn-mini btn-red"><i class="icon-remove"></i></button>
-															@else
-																<button class="btn btn-mini btn-blue">{{$absensi->lembur}}</button>
-															@endif
-														@endif
-													</center>
-												</td>
-											</tr>
-											<?php $i++; ?>
-										@endforeach
-									</tbody>
-								</table>
+							<div class="box-content">
+								<?php $bulan = array('Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'); ?>
+								{{ Form::open(array('route' => 'hrdmanager.absensi.store', 'class' => 'form-horizontal')) }}
+									<div class="control-group">
+							            <label class="control-label">Bulan</label>
+							            <div class="controls">
+							                <select class="span4" id="bulan" name="bulan">
+												<option selected="">- Pilih Bulan -</option>
+												<?php $i = 1; ?>
+												@foreach($bulan as $b)
+												<option value="{{$i}}">{{$b}}</option>
+												<?php $i++; ?>
+												@endforeach
+											</select>
+							            </div>
+							        </div>
+							        <div class="control-group">
+							            <label class="control-label">Tahun</label>
+							            <div class="controls">
+							                <select class="span4" id="tahun" name="tahun">
+												<option selected="">- Pilih Tahun -</option>
+												@for($i=date('Y')-5; $i<date('Y')+6; $i++)
+												<option value="{{$i}}">{{$i}}</option>
+												@endfor
+											</select>
+							            </div>
+							        </div>
+							        <div class="form-actions">
+										<button type="submit" class="btn btn-brown btn-large">Filter Absensi</button>
+										<button type="button" class="btn btn-large">Cancel</button>
+									</div>
+								{{Form::close()}}
 							</div>
 						</div>
 					</div>

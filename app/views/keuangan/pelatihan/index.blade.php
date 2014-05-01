@@ -56,6 +56,7 @@
 									<tbody>
 										<?php $i=1; ?>
 										@foreach($data['pelatihan'] as $pelatihan)
+										@if($pelatihan->status == 3 or $pelatihan->status == 2)
 											<tr>
 												<td><center>{{ $i }}</center></td>
 												<td>{{ date("d M Y", strtotime($pelatihan->tanggalmulai)) }}</td>
@@ -75,9 +76,7 @@
 												</td>
 												<td class='hidden-480'>
 													<center>
-														@if($pelatihan->status == 3)
-															<a href="{{ Url::asset('keuangan/unapprove-pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn btn-red" rel="tooltip" title="Batal Konfirmasi"><i class="icon-ban-circle"></i></a>
-														@elseif($pelatihan->status == 2 )
+														@if($pelatihan->status == 2 )
 															<a href="{{ Url::asset('keuangan/approve-pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn btn-blue" rel="tooltip" title="Konfirmasi Pembayaran"><i class="icon-check"></i></a>
 														@else
 														
@@ -87,6 +86,7 @@
 													</center>
 												</td>
 											</tr>
+											@endif
 											<?php $i++; ?>
 										@endforeach
 									</tbody>

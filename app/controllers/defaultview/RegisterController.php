@@ -129,6 +129,7 @@ class RegisterController extends BaseController {
       $i++;
     }
     $this->notifikasi->simpan($input);
+   
   }
   
 }

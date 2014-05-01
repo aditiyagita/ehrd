@@ -1,6 +1,6 @@
 <?php namespace Karyawan;
 
-use BaseController, View, Input, Redirect, Pelatihan, Peserta, User, Auth; // Tanggal;
+use BaseController, View, Input, Redirect, Pelatihan, DetailPelatihan, User, Auth; // Tanggal;
 
 class PelatihanController extends BaseController {
 
@@ -14,7 +14,7 @@ class PelatihanController extends BaseController {
       	$this->title 		= 'Karyawan JC & K - Pelatihan';
       	$this->pelatihan 	= new Pelatihan();
       	$this->user 		= new User();
-      	$this->daftar 		= new Peserta();
+      	$this->daftar 		= new DetailPelatihan();
 
     }
 

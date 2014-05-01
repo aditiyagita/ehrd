@@ -53,7 +53,6 @@
 									@if(count($coba) == 0)
 									<li>
 										<a href="#">
-											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
 											<div class="details">
 												<div class="name">Belum Melamar</div>
 												<div class="message">
@@ -66,11 +65,10 @@
 									@foreach($coba as $cb)
 									<li>
 										<a href="{{URL::asset('job-vacancy/'.$cb->lowongan->idlowongan)}}">
-											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
 											<div class="details">
 												<div class="name">{{ $cb->lowongan->judul }}</div>
 												<div class="message">
-													{{ substr(str_replace(array('<h1>','</h1>','<h2>','</h2>','</br>','<ol>','</ol>','<li>','</li>', '<p>','</p>', '<br />'), ' ', $cb->lowongan->uraian), 0, 15	) }}
+													{{ substr(str_replace(array('<h1>','</h1>','<h2>','</h2>','</br>','<ol>','</ol>','<li>','</li>','<ul>','</ul>','<strong>','</strong>','<p>','</p>','<b>','</b>','<i>','</i>','<u>','</u>'), ' ', $cb->lowongan->uraian), 0, 15	) }}
 												</div>
 											</div>
 										</a>
@@ -124,12 +122,13 @@
 									  url: url
 									});
 									$('.ceks').fadeOut("slow");
+									$('.notif').click(false);
 						        });
 						    });
 						</script>
 						<ul class="icon-nav">
-							<li class='dropdown notif'>
-								<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-globe"></i>
+							<li class='dropdown '>
+								<a href="#" class='dropdown-toggle notif' data-toggle="dropdown"><i class="icon-globe"></i>
 
 									@if($total <> 0)
 										<span class="label label-lightred ceks">{{ $total }}</span>
@@ -139,7 +138,6 @@
 									@if($total == 0)
 									<li>
 										<a href="#">
-											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
 											<div class="details">
 												<div class="name">Kosong</div>
 												<div class="message">
@@ -154,7 +152,6 @@
 										<li>
 											@if($not->type <> 'Cuti')
 											<a href="{{URL::asset('hrdstaff/pelatihan')}}">
-											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
 												<div class="details">
 													<div class="name">{{$not->type}}</div>
 													<div class="message">
@@ -196,28 +193,35 @@
 
 					@elseif(Auth::user()->idjabatan == 2)
 						<?php
-							$iduser 			= Auth::user()->iduser;
-							$pelatihan 			= new Pelatihan();
-							$cuti 				= new Cuti();
-							$pengundurandiri 	= new PengunduranDiri();
-							$coba 				= $pelatihan->getNotif();
-							$coba1 				= $cuti->getNotif();
-							$coba2 				= $pengundurandiri->getNotif();
-							$total 				= count($coba)+count($coba1)+count($coba2);
+							$notif = new Notifikasi();
+							$notifikasi = $notif->getNotifikasi();
+							$total = count($notifikasi);
 						?>
+						<script type="text/javascript">
+							 $(document).ready(function() { 
+						        $('.notif').click(function(){
+						            var url = "{{ URL::asset('updatenotification') }}"; 
+						            $.ajax({
+									  type: "GET",
+									  url: url
+									});
+									$('.ceks').fadeOut("slow");
+									$('.notif').click(false);
+						        });
+						    });
+						</script>
 						<ul class="icon-nav">
-							<li class='dropdown'>
-								<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-globe"></i>
+							<li class='dropdown '>
+								<a href="#" class='dropdown-toggle notif' data-toggle="dropdown"><i class="icon-globe"></i>
 
 									@if($total <> 0)
-										<span class="label label-lightred">{{ $total }}</span>
+										<span class="label label-lightred ceks">{{ $total }}</span>
 									@endif
 								</a>
 								<ul class="dropdown-menu pull-right message-ul">
 									@if($total == 0)
 									<li>
 										<a href="#">
-											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
 											<div class="details">
 												<div class="name">Kosong</div>
 												<div class="message">
@@ -227,46 +231,29 @@
 										</a>
 									</li>
 									@else
-										@if(count($coba) > 0)
+										@if(count($notifikasi) > 0)
+										@foreach($notifikasi as $not)
 										<li>
-											<a href="{{URL::asset('hrdmanager/pelatihan')}}">
-												<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+											@if($not->type == 'Cuti')
+												<a href="{{URL::asset('hrdmanager/cuti')}}">
+											@elseif($not->type == 'Request Pelatihan')
+												<a href="{{URL::asset('hrdmanager/pelatihan')}}">
+											@elseif($not->type == 'Request Pengunduran Diri')
+												<a href="{{URL::asset('hrdmanager/pengunduran-diri')}}">
+												@elseif($not->type == 'Konfirmasi Pelatihan')
+												<a href="{{URL::asset('hrdmanager/pelatihan')}}">
+											@else
+											<a href="#">
+											@endif
 												<div class="details">
-													<div class="name">Pelatihan</div>
+													<div class="name">{{$not->type}}</div>
 													<div class="message">
-													{{ count($coba) }} Pelatihan Belum Disetujui
+													{{ $not->uraian }}
 													</div>
 												</div>
 											</a>
 										</li>
-										@endif
-
-										@if(count($coba1) > 0)
-										<li>
-											<a href="{{URL::asset('hrdmanager/cuti')}}">
-												<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
-												<div class="details">
-													<div class="name">Cuti Karyawan</div>
-													<div class="message">
-														{{ count($coba1) }} Cuti Karyawan Belum Disetujui
-													</div>
-												</div>
-											</a>
-										</li>
-										@endif
-
-										@if(count($coba2) > 0)
-										<li>
-											<a href="{{URL::asset('hrdmanager/pengunduran-diri')}}">
-												<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
-												<div class="details">
-													<div class="name">Pengunduran Diri</div>
-													<div class="message">
-														{{ count($coba2) }} Pengunduran Diri Belum Disetujui
-													</div>
-												</div>
-											</a>
-										</li>
+										@endforeach
 										@endif
 									@endif
 								</ul>
@@ -298,24 +285,35 @@
 
 					@elseif(Auth::user()->idjabatan == 5)
 						<?php
-							$iduser 			= Auth::user()->iduser;
-							$pelatihan 			= new Pelatihan();
-							$coba 				= $pelatihan->getNotif();
-							$total 				= count($coba);
+							$notif = new Notifikasi();
+							$notifikasi = $notif->getNotifikasi();
+							$total = count($notifikasi);
 						?>
+						<script type="text/javascript">
+							 $(document).ready(function() { 
+						        $('.notif').click(function(){
+						            var url = "{{ URL::asset('updatenotification') }}"; 
+						            $.ajax({
+									  type: "GET",
+									  url: url
+									});
+									$('.ceks').fadeOut("slow");
+									$('.notif').click(false);
+						        });
+						    });
+						</script>
 						<ul class="icon-nav">
-							<li class='dropdown'>
-								<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-globe"></i>
+							<li class='dropdown '>
+								<a href="#" class='dropdown-toggle notif' data-toggle="dropdown"><i class="icon-globe"></i>
 
 									@if($total <> 0)
-										<span class="label label-lightred">{{ $total }}</span>
+										<span class="label label-lightred ceks">{{ $total }}</span>
 									@endif
 								</a>
 								<ul class="dropdown-menu pull-right message-ul">
 									@if($total == 0)
 									<li>
 										<a href="#">
-											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
 											<div class="details">
 												<div class="name">Kosong</div>
 												<div class="message">
@@ -325,18 +323,25 @@
 										</a>
 									</li>
 									@else
-										@if(count($coba) > 0)
+										@if(count($notifikasi) > 0)
+										@foreach($notifikasi as $not)
 										<li>
-											<a href="{{URL::asset('keuangan/pelatihan')}}">
-												<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
+											@if($not->type == 'Approve Pelatihan')
+												<a href="{{URL::asset('keuangan/pelatihan')}}">
+											@elseif($not->type == 'Absensi')
+												<a href="{{URL::asset('keuangan/penggajian')}}">
+											@else
+												<a href="#">
+											@endif
 												<div class="details">
-													<div class="name">Pelatihan</div>
+													<div class="name">{{$not->type}}</div>
 													<div class="message">
-													{{ count($coba) }} Pelatihan Belum Dikonfirmasi
+													{{ $not->uraian }}
 													</div>
 												</div>
 											</a>
 										</li>
+										@endforeach
 										@endif
 									@endif
 								</ul>
@@ -381,12 +386,13 @@
 									  url: url
 									});
 									$('.ceks').fadeOut("slow");
+									$('.notif').click(false);
 						        });
 						    });
 						</script>
 						<ul class="icon-nav">
-							<li class='dropdown notif'>
-								<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-globe"></i>
+							<li class='dropdown '>
+								<a href="#" class='dropdown-toggle notif' data-toggle="dropdown"><i class="icon-globe"></i>
 
 									@if($total <> 0)
 										<span class="label label-lightred ceks">{{ $total }}</span>
@@ -396,7 +402,6 @@
 									@if($total == 0)
 									<li>
 										<a href="#">
-											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
 											<div class="details">
 												<div class="name">Kosong</div>
 												<div class="message">
@@ -414,7 +419,6 @@
 											@else
 											<a href="{{URL::asset('karyawan/pelatihan')}}">
 											@endif
-											<img src="{{ URL::asset('assets/img/demo/user-1.jpg') }}" alt="">
 												<div class="details">
 													<div class="name">{{$not->type}}</div>
 													<div class="message">

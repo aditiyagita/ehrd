@@ -11,7 +11,7 @@
       function tambah(){
       	i++;
         var addNama = "<input type='text' name='namaanak[]' id='nama' placeholder='Nama Anak' class='input-block-level' data-rule-required='true' required>";
-        var addUmur = "<input type='text' name='umuranak[]' id='umur' placeholder='Umur' class='input-block-level' data-rule-required='true' required>";
+        var addUmur = "<input type='number' name='umuranak[]' id='umur' placeholder='Umur' class='input-block-level' data-rule-required='true' required>";
         var labelNama = '<label for="nama" class="control-label">Nama Anak</label>';
         var labelUmur = '<label for="umur" class="control-label">Umur</label>';
         $("#anak").append("<div id='"+i+"'><div class='control-group "+i+"'>"+labelNama+"<div class='controls'>"+addNama+"</div></div><div class='control-group "+i+"'>"+labelUmur+"<div class='controls'>"+addUmur+"</div></div></div>");
@@ -83,7 +83,7 @@
 										<div class="control-group">
 											<label for="umur" class="control-label">Umur</label>
 											<div class="controls">
-												<input type="text" value="{{$data['keluarga']->umur}}" name="umur" id="umur" placeholder="Umur" class="input-block-level" data-rule-number="true" data-rule-required="true">
+												<input type="number" value="{{$data['keluarga']->umur}}" name="umur" id="umur" placeholder="Umur" class="input-block-level" data-rule-number="true" data-rule-required="true">
 											</div>
 										</div>
 										<div class="control-group">
@@ -96,9 +96,9 @@
 
 										</div>
 										<div class="control-group" style="float:right">
-											<button type="submit" class="btn btn-primary">Save changes</button>
-											<a id="tambah" class="btn btn-primary" onclick="tambah();">Add Anak</a>
-            								<a id="kurang" class="btn btn-primary" onclick="kurang();">Batal Add Anak</a>
+											<button type="submit" class="btn btn-brown btn-large">Save changes</button>
+											<a id="tambah" class="btn btn-inverse btn-large" onclick="tambah();">Add Anak</a>
+            								<a id="kurang" class="btn btn-large" onclick="kurang();">Batal Add Anak</a>
 										</div>
 									{{Form::close()}}			
 									<br>

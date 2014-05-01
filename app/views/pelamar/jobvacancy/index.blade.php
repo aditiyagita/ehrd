@@ -54,7 +54,7 @@
 											</span>
 										</div>
 										<div class="post-text">
-											<p>{{ str_replace(array('<h1>','</h1>','<h2>','</h2>','</br>','<ol>','</ol>','<li>','</li>'), ' ', $jobvacancy->uraian) }}</p>
+											<p>{{ str_replace(array('<h1>','</h1>','<h2>','</h2>','</br>','<ol>','</ol>','<li>','</li>','<ul>','</ul>','<strong>','</strong>','<p>','</p>','<b>','</b>','<i>','</i>','<u>','</u>'), ' ', $jobvacancy->uraian) }}</p>
 										</div>
 									</div>
 								</div>

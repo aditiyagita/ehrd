@@ -77,13 +77,13 @@
 										<div class="control-group">
 											<label for="gaji" class="control-label">Gaji</label>
 											<div class="controls">
-												<input type="text" name="gaji" id="gaji" placeholder="Gaji" class="input-block-level" data-rule-required="true" required>
+												<input type="number" name="gaji" id="gaji" placeholder="Gaji" class="input-block-level" data-rule-required="true" required>
 											</div>
 										</div>
 										<div class="control-group">
 											<label for="tunjangan" class="control-label">Tunjangan</label>
 											<div class="controls">
-												<input type="text" name="tunjangan" id="tunjangan" placeholder="Tunjangan" class="input-block-level" data-rule-required="true" required>
+												<input type="number" name="tunjangan" id="tunjangan" placeholder="Tunjangan" class="input-block-level" data-rule-required="true" required>
 											</div>
 										</div>
 										<div class="control-group">
@@ -106,8 +106,8 @@
 											</div>
 										</div>
 										<div class="control-group" style="float:right">
-											<button type="submit" class="btn btn-primary">Save changes</button>
-											<button type="button" class="btn">Cancel</button>
+											<button type="submit" class="btn btn-brown btn-large">Save changes</button>
+											<button type="button" class="btn btn-large">Cancel</button>
 										</div>
 									{{Form::close()}}
 									<table id="detailRetur" class="table table-hover table-nomargin">

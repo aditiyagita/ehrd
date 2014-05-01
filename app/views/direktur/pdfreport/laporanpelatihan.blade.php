@@ -64,10 +64,10 @@ table.laporan tbody td{
 		</thead>
 		<tbody>
 		<?php $i=1; ?>
-		@foreach($data['pelatihan']->peserta as $peserta)
+		@foreach($data['pelatihan']->detailpelatihan as $peserta)
 		<tr>
 			<td>{{$i}}</td>
-			<td>{{$peserta->karyawan->nokaryawan}}</td>
+			<td>{{$peserta->nokaryawan}}</td>
 			<td>{{$peserta->karyawan->user->nama_lengkap}}</td>
 			<td>{{$peserta->karyawan->department->department}}</td>
 		</tr>

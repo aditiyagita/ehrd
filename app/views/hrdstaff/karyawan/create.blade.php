@@ -122,23 +122,6 @@
 													</div>
 												</div>
 												<div class="control-group">
-													<label for="jabatan" class="control-label">Hak Akses</label>
-													<div class="controls">
-														<select name="jabatan" id="jabatan" class='input-block-level' required>
-															<option value="" SELECTED>-Pilih Hak Akses-</option>
-															<?php $i=1;?>
-															@foreach ($data['jabatan'] as $jabatan)
-																@if($jabatan->idjabatan == 7)
-
-                                                                @else
-																<option value="{{ $jabatan->idjabatan }}">{{ $jabatan->jabatan }}</option>
-																@endif
-								                            <?php $i++ ?>
-								                            @endforeach
-														</select>
-													</div>
-												</div>
-												<div class="control-group">
 													<label for="namabank" class="control-label">Nama Bank</label>
 													<div class="controls">
 														<input type="text" name="namabank" id="namabank" placeholder="Nama Bank" class="input-block-level" required>
@@ -197,6 +180,16 @@
 																<option value="{{$i}}">{{$statuskawin}}</option>
 															<?php $i++ ?>
 															@endforeach
+														</select>
+													</div>
+												</div>
+												<div class="control-group">
+													<label for="kacamata" class="control-label">Memakai Kacamata?</label>
+													<div class="controls">
+														<select name="kacamata" id="kacamata" class='input-block-level' required>
+															<option value="" SELECTED>-Pilih Kacamata-</option>
+															<option value="1" >Ya</option>
+															<option value="2" >Tidak</option>
 														</select>
 													</div>
 												</div>	
@@ -303,16 +296,6 @@
 													<label for="beratbadan" class="control-label">Berat Badan</label>
 													<div class="controls">
 														<input type="number" name="berat_badan" id="beratbadan" placeholder="Berat Badan"  class="input-block-level" min="1" max="9999" required>
-													</div>
-												</div>
-												<div class="control-group">
-													<label for="kacamata" class="control-label">Memakai Kacamata?</label>
-													<div class="controls">
-														<select name="kacamata" id="kacamata" class='input-block-level' required>
-															<option value="" SELECTED>-Pilih Kacamata-</option>
-															<option value="1" >Ya</option>
-															<option value="2" >Tidak</option>
-														</select>
 													</div>
 												</div>
 												<div class="form-actions">

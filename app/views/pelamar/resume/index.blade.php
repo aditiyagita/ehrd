@@ -68,7 +68,13 @@
 													<label for="no_passport" class="control-label">Foto</label>
 													<div class="controls">
 														<div class="fileupload fileupload-new" data-provides="fileupload">
-															<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"></div>
+															<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+															@if($data['user']->foto == null)
+																<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image">
+															@else
+																<img src="{{Url::asset('assets/images/user/'.$data['user']->foto)}}">
+															@endif
+															</div>
 															<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
 															<div>
 																<span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span>
@@ -94,32 +100,30 @@
 												<div class="control-group">
 													<label for="kode_pos" class="control-label">Kode Pos</label>
 													<div class="controls">
-														<input type="text" name="kode_pos" id="kode_pos" placeholder="Kode Pos"  value="{{ $data['user']->kode_pos }}" class="input-block-level" required>
+														<input type="number" name="kode_pos" id="kode_pos" placeholder="Kode Pos"  value="{{ $data['user']->kode_pos }}" class="input-block-level"  min="1" max="9999999999999" required>
 													</div>
 												</div>
 												<div class="control-group">
-													<label for="warga_negara" class="control-label">Warga Negara</label>
+													<label for="kode_pos" class="control-label">Warga Negara</label>
 													<div class="controls">
-														<select name="warga_negara" id="warga_negara" class='input-block-level' required>
-															<?php $i=1;?>
-															<?php $negara = array('Indonesia', 'Malaysia', 'Singapura', 'Brunei Darussalam', 'Lain-lain'); ?>
-															@foreach ($negara as $ng)
-								                                @if ( $data['user']->warga_negara == $ng)
-								                                    <option class="isi" value="{{ $ng }}" SELECTED>{{ $ng }}</option>
-								                                @else
-								                                    <option class="isi" value="{{ $ng }}">{{ $ng }}</option>
-								                                @endif
-								                            <?php $i++ ?>
-								                            @endforeach
-														</select>
+														<input type="text" name="warga_negara" id="warga_negara" placeholder="Warga Negara"  value="{{ $data['user']->warga_negara }}" class="input-block-level" readonly>
 													</div>
 												</div>
+												@if($data['user']->warga_negara == "Indonesia")
+												<div class="control-group">
+													<label for="no_ktp" class="control-label">No. KTP</label>
+													<div class="controls">
+														<input type="number" name="no_ktp" id="no_ktp" placeholder="Nama Lengkap" value="{{ $data['user']->no_ktp }}" class="input-block-level" min="1" max="999999999999" required>
+													</div>
+												</div>
+												@else
 												<div class="control-group">
 													<label for="no_passport" class="control-label">No. Passport</label>
 													<div class="controls">
-														<input type="text" name="no_passport" id="no_passport" placeholder="No. Passport" value="{{ $data['user']->no_passport }}" class="input-block-level">
+														<input type="number" name="no_passport" id="no_passport" placeholder="No. Passport" value="{{ $data['user']->no_passport }}" class="input-block-level" min="1" max="999999999999" required>
 													</div>
 												</div>
+												@endif
 												<div class="control-group">
 													<label for="kacamata" class="control-label">Apakah Anda Memakai Kacamata?</label>
 													<div class="controls">
@@ -151,7 +155,7 @@
 												<div class="control-group">
 													<label for="no_hp" class="control-label">No. Handphone</label>
 													<div class="controls">
-														<input type="text" name="no_hp" id="no_hp" placeholder="No Handphone" value="{{ $data['user']->no_hp }}" class="input-block-level" required>
+														<input type="number" name="no_hp" id="no_hp" placeholder="No Handphone" value="{{ $data['user']->no_hp }}" class="input-block-level"  min="1" max="9999999999999" required>
 													</div>
 												</div>
 												<div class="control-group">
@@ -184,12 +188,6 @@
 															<input type="radio" name="jenis_kelamin" value=2 CHECKED> Perempuan
 														</label>
 														@endif
-													</div>
-												</div>
-												<div class="control-group">
-													<label for="no_ktp" class="control-label">No. KTP</label>
-													<div class="controls">
-														<input type="text" name="noktp" id="no_ktp" placeholder="Nama Lengkap" value="{{ $data['user']->no_ktp }}" class="input-block-level">
 													</div>
 												</div>
 												<div class="control-group">
@@ -227,18 +225,18 @@
 												<div class="control-group">
 													<label for="tinggibadan" class="control-label">Tinggi Badan</label>
 													<div class="controls">
-														<input type="text" name="tinggi_badan" id="tinggibadan" placeholder="Tinggi Badan"  value="{{ $data['user']->tinggi_badan }}" class="input-block-level" required>
+														<input type="number" name="tinggi_badan" id="tinggibadan" placeholder="Tinggi Badan"  value="{{ $data['user']->tinggi_badan }}" class="input-block-level"  min="1" max="9999999999999" required>
 													</div>
 												</div>
 												<div class="control-group">
 													<label for="beratbadan" class="control-label">Berat Badan</label>
 													<div class="controls">
-														<input type="text" name="berat_badan" id="beratbadan" placeholder="Berat Badan"  value="{{ $data['user']->berat_badan }}" class="input-block-level" required>
+														<input type="number" name="berat_badan" id="beratbadan" placeholder="Berat Badan"  value="{{ $data['user']->berat_badan }}" class="input-block-level"  min="1" max="9999999999999" required>
 													</div>
 												</div>
 												<div class="form-actions">
-													<button type="submit" class="btn btn-brown btn-primary" id="i_submit">Update Profile</button>
-													<button type="button" class="btn">Cancel</button>
+													<button type="submit" class="btn btn-brown btn-large" id="i_submit">Update Profile</button>
+													<button type="button" class="btn btn-large">Cancel</button>
 												</div>										
 											</div>
 										</div>

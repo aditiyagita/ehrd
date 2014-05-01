@@ -55,7 +55,15 @@
 											<h4>Surat Lamaran</h4>
 										</center>
 									</td>
-									<td width=20%><center><img src="{{Url::asset('assets/images/user/'.$data['lamaran']->user->foto)}}" width="170px"></center></td>
+									<td width=20%>
+										<center>
+											@if($data['lamaran']->user->foto <> null)
+												<img src="{{Url::asset('assets/images/user/'.$data['lamaran']->user->foto)}}" width="170px">
+											@else
+												<img src="{{ URL::asset('assets/images/user/default.jpg') }}" width="170px">
+											@endif
+										</center>
+									</td>
 								</tr>
 								<tr>
 									<td width=25%><b>Jabatan Yang Dilamar</b></td>
@@ -108,7 +116,17 @@
 									<td width=25%><b>No. Kartu Penduduk</b></td>
 									<td width=25%>{{  $data['lamaran']->user->no_ktp }}</td>
 									<td width=25% rowspan=2><b>Status Pernikahan</b></td>
-									<td width=25% rowspan=2>{{ $data['lamaran']->user->tinggi_badan }}</td>
+									<td width=25% rowspan=2>
+										@if($data['lamaran']->user->status_kawin  == 1)
+											Belum Kawin
+										@elseif($data['lamaran']->user->status_kawin  == 2)
+											Kawin
+										@elseif($data['lamaran']->user->status_kawin  == 3)
+											Janda
+										@elseif($data['lamaran']->user->status_kawin  == 4)
+											Duda
+										@endif
+									</td>
 								</tr>
 								<tr>
 									<td width=25%><b>No. Passport</b></td>

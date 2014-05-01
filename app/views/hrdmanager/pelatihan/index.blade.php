@@ -83,7 +83,7 @@
 
 															@else
 															<a href="{{ Url::asset('hrdmanager/approve-pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn btn-blue" rel="tooltip" title="Approve"><i class="icon-ok-sign"></i></a>
-															<a href="{{ Url::asset('hrdmanager/notapprove-pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn btn-red" rel="tooltip" title="Not Approve"><i class="icon-ok-sign"></i></a>
+															<a href="{{ Url::asset('hrdmanager/notapprove-pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn btn-red" rel="tooltip" title="Not Approve"><i class="icon-ban-circle"></i></a>
 															@endif
 															
 														@endif	

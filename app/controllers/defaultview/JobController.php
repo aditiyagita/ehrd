@@ -62,7 +62,7 @@ class JobController extends BaseController {
     $bahasa               = count($cekk->bahasa);
     $pertanyaan           = count($cekk->jawaban);
 
-    if( $cektinggi == null OR $cekberat == null OR $pendidikan == 0 OR $bahasa == 0 OR $pertanyaan == 0){
+    if( $pendidikan == 0 OR $bahasa == 0 OR $pertanyaan == 0){
       return Redirect::back()->withErrors('Maaf, Data Resume Harus Dilengkapi');
     }else{
       $this->lamaran->simpan($input);

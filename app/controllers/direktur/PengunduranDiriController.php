@@ -1,6 +1,6 @@
 <?php namespace Direktur;
 
-use BaseController, View, Input, Redirect, Cuti, user, PengunduranDiri, Karyawan, Auth, PDF; // Tanggal;
+use BaseController, View, Input, Redirect, Cuti, user, PengunduranDiri, Karyawan, Auth, PDF, Session; // Tanggal;
 
 class PengunduranDiriController extends BaseController {
 
@@ -11,7 +11,7 @@ class PengunduranDiriController extends BaseController {
                       )
         );
       	$this->tanda = array('');
-	    $this->title = 'Pengunduran Diri';
+	    $this->title = 'Direktur JC & K - Pengunduran Diri';
 	    $this->cuti = new Cuti();
 	    $this->kary = new Karyawan();
 	    $this->user = new user();
@@ -34,9 +34,13 @@ class PengunduranDiriController extends BaseController {
 		$filter['tanggalsampai'] = $input['sampaitahun'].'-'.$input['sampaibulan'].'-'.$input['sampaihari'];
 		$data['pengundurandiri'] = $this->pengunduran->cetakLaporan($filter);
 		$data['filter'] = $filter;
-		$pdf = PDF::loadView('direktur.pdfreport.laporanpengundurandiri', array('data' => $data))->setPaper('a4')->setOrientation('portrait');
-		return $pdf->stream('laporan-pengunduran-diri-'.$filter['tanggaldari'].'-'.$filter['tanggalsampai'].'.pdf');
-
+		if(count($data['pengundurandiri']) > 0){
+			$pdf = PDF::loadView('direktur.pdfreport.laporanpengundurandiri', array('data' => $data))->setPaper('a4')->setOrientation('portrait');
+			return $pdf->stream('laporan-pengunduran-diri-'.$filter['tanggaldari'].'-'.$filter['tanggalsampai'].'.pdf');
+		}else{
+			Session::flash('warning', 'Data Pengunduran Diri Kosong');
+        		return Redirect::back();
+		}
 	}
 
 	public function cetakPengunduranDiri($value)

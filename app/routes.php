@@ -11,13 +11,14 @@
 |
 */
 
-App::missing(function($exception)
-    {
+// App::missing(function($exception)
+//     {
 
-        // shows an error page (app/views/error.blade.php)
-        // returns a page not found error
-        return 'not found';
-    });
+//         // shows an error page (app/views/error.blade.php)
+//         // returns a page not found error
+//         //return View::make('notfound');
+//         return Redirect::to('/');
+//     });
 
 
 Route::get('/', 'defaultview\DashboardController@index');
@@ -153,7 +154,7 @@ Route::group(['prefix' => 'hrdmanager', 'before' => 'auth|hakHrdManager'], funct
     Route::get('approve-cuti/{id}', 'hrdmanager\CutiController@approveCuti');
 
     Route::resource('absensi', 'hrdmanager\AbsensiController');
-    //Route::get('approve-cuti/{id}', 'hrdmanager\CutiController@approveCuti');
+    Route::post('absensi-karyawan/accept', 'hrdmanager\AbsensiController@approveAbsensi');
     
 });
 Route::group(['prefix' => 'direktur', 'before' => 'auth|hakDirektur'], function() {

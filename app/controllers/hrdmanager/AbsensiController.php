@@ -1,6 +1,6 @@
 <?php namespace Hrdmanager;
 
-use BaseController, View, Input, Redirect, Cuti, user, Karyawan, Auth, Absensi; // Tanggal;
+use BaseController, View, Input, Redirect, Cuti, user, Karyawan, Auth, LaporanAbsensi, ResumeAbsensi, Session; // Tanggal;
 
 class AbsensiController extends BaseController {
 
@@ -12,45 +12,53 @@ class AbsensiController extends BaseController {
         );
       	$this->tanda = array('');
 	    $this->title = 'HRD Manager JC & K - Absensi';
-	    $this->absensi = new Absensi();
+	    $this->absensi = new LaporanAbsensi();
+	    $this->resume = new ResumeAbsensi();
 	}
 
 	public function index(){
     	$data['menu'] = $this->menu;
     	$data['tanda'] = $this->tanda;
     	$data['title'] = $this->title;
-    	$data['absensi'] = $this->absensi->getDataAbsensi();
     	return View::make('hrdmanager.absensi.index')
                   ->with('data', $data);
 	}
 
-	public function show($id)
+	public function store()
 	{
-        $data['menu'] 		= $this->menu;
+		$data['menu'] 		= $this->menu;
     	$data['tanda'] 		= $this->tanda;
     	$data['title'] 		= $this->title;
-    	$data['cuti']		= $this->cuti->getDataCuti($id);
-    	$data['listcuti']	= $this->cuti->getListCuti($data['cuti']->idkaryawan);
-    	$data['totalcuti']	= $this->cuti->getTotal($data['cuti']->idkaryawan);
-    	$data['settingcuti']= $this->settingcuti->getTotalCuti();
-    	return View::make('hrdstaff.cuti.show')
+    	$data['input'] 		= Input::all();
+    	$data['absensi'] 	= $this->absensi->listAcceptAbsensi($data['input']);
+    	$resume = $this->resume->getLaporanAbsensi($data['input']);
+		//var_dump($data['absensi']);
+		if(count($data['absensi']) > 0){
+			return View::make('hrdmanager.absensi.summaryabsensi')
                   ->with('data', $data);
+		}else{
+			if(count($resume) > 0){
+				Session::flash('info', 'Data Absensi Sudah Di Accept');
+        		return Redirect::back();
+			}else{
+				Session::flash('warning', 'Data Absensi Masih Kosong');
+        		return Redirect::back();
+			}
+        	
+        }
+       // return json_encode($data['absensi']);
+       // return $data['input'];
 
 	}
 
-	public function approveCuti($value)
+	public function approveAbsensi()
 	{
-		$input['idcuti'] = $value;
-		$input['status'] = 2;
-		$this->cuti->approveCuti($input);
-		return Redirect::back();
+		
+		$input['bulan'] = Input::get('bulan');
+		$input['tahun'] = Input::get('tahun');
+		$input['check'] = str_replace(array('[',']'), '', json_encode(Input::get('check')));
+		$this->absensi->acceptAbsensi($input);
+		Session::flash('success', 'Accept Absensi Berhasil');
+		return Redirect::to('hrdmanager/absensi');
 	}
-	public function unapproveCuti($value)
-	{
-		$input['idcuti'] = $value;
-		$input['status'] = 1;
-		$this->cuti->approveCuti($input);
-		return Redirect::back();
-	}
-
 }

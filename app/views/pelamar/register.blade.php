@@ -226,9 +226,9 @@
 										</div>
 									</div>
 									<div class="span12">
-										<div class="form-actions">
-											<button type="submit" class="btn btn-brown">Save changes</button>
-											<button type="button" class="btn">Cancel</button>
+										<div class="form-actions"> 
+											<button type="submit" class="btn btn-brown btn-large">Save changes</button>
+											<button type="button" class="btn btn-large">Cancel</button>
 										</div>
 									</div>
 								{{ Form::close() }}

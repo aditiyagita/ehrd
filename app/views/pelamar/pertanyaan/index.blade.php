@@ -82,13 +82,13 @@
 														<td class='hidden-1024'>
 															{{ Form::hidden('idpertanyaan['.$i.']', $pertanyaan->idpertanyaan) }}
 															{{ $pertanyaan->pertanyaan }}<br>
-															<strong>Penjelasan : </strong><input type="text" name="uraian[{{$i}}]" id="uraian[{{$i}}]" placeholder="Penjelasan" class="input-block-level">
+															<strong>Penjelasan : </strong><input type="text" name="uraian[{{$i}}]" id="uraian[{{$i}}]" placeholder="Penjelasan" class="input-block-level" required>
 														</td>
 														<td>
 															@if(($pertanyaan->idpertanyaan == 6) OR ($pertanyaan->idpertanyaan == 7))
 															@else
 															<label class='radio'>
-																<input type="radio" name="jawab[{{$i}}]" value=1> Ya
+																<input type="radio" name="jawab[{{$i}}]" value=1 required> Ya
 															</label>
 															<label class='radio'>
 																<input type="radio" name="jawab[{{$i}}]" value=2> Tidak
@@ -102,8 +102,8 @@
 										</tbody>
 									</table>
 									<div style="float:right">
-										<button type="submit" class="btn btn-brown btn-primary">Jawab Pertanyaan</button>
-										<button type="button" class="btn">Cancel</button>
+										<button type="submit" class="btn btn-brown btn-large">Jawab Pertanyaan</button>
+										<button type="button" class="btn btn-large">Cancel</button>
 									</div>	
 									{{Form::close()}}
 									@endif

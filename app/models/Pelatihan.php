@@ -16,9 +16,9 @@ class Pelatihan extends Eloquent {
         return date('Y-m-d');
     }
 
-	public function peserta()
+	public function detailpelatihan()
 	{
-	    return $this->hasMany('Peserta', 'idpeserta');
+	    return $this->hasMany('DetailPelatihan', 'idpelatihan');
 	}
 
 	public function getDataPelatihan($id = null){
@@ -73,7 +73,7 @@ class Pelatihan extends Eloquent {
     }
 
     public function cekPeserta($id, $nokaryawan){
-    	$isi = Peserta::where('idpelatihan', $id)->where('nokaryawan', $nokaryawan)->get();
+    	$isi = DetailPelatihan::where('idpelatihan', $id)->where('nokaryawan', $nokaryawan)->get();
     	if (count($isi) > 0) {
     		$cek = 1;
     	}else{

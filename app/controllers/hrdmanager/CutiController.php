@@ -46,7 +46,7 @@ class CutiController extends BaseController {
 		$input['idcuti'] = $value;
 		$input['status'] = 2;
 		$this->cuti->approveCuti($input);
-		Session::flash('success', 'Not Approve Pengunduran Diri Berhasil');
+		Session::flash('success', 'Approve Cuti Berhasil');
 		return Redirect::back();
 	}
 	public function unapproveCuti($value)
@@ -54,7 +54,7 @@ class CutiController extends BaseController {
 		$input['idcuti'] = $value;
 		$input['status'] = 1;
 		$this->cuti->approveCuti($input);
-		Session::flash('success', 'Not Approve Pengunduran Diri Berhasil');
+		Session::flash('success', 'Not Approve Cuti Berhasil');
 		return Redirect::back();
 	}
 

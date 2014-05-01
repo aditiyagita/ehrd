@@ -42,7 +42,7 @@ class PelatihanController extends BaseController {
 		$input['status'] 		= 2;
 		$apdet 					= $this->pelatihan->apdet($input);
 
-		Session::flash('success', 'Approve Pengunduran Diri Berhasil');
+		Session::flash('success', 'Approve Pelatihan Berhasil');
 		return Redirect::to('hrdmanager/pelatihan');	
 	}
 
@@ -52,7 +52,7 @@ class PelatihanController extends BaseController {
 		$input['status'] 		= 1;
 		$apdet 					= $this->pelatihan->apdet($input);
 
-		Session::flash('success', 'Unapprove Pengunduran Diri Berhasil');
+		Session::flash('success', 'Unapprove Pelatihan Berhasil');
 		return Redirect::to('hrdmanager/pelatihan');	
 	}
 
@@ -62,7 +62,7 @@ class PelatihanController extends BaseController {
 		$input['status'] 		= 4;
 		$apdet 					= $this->pelatihan->apdet($input);
 
-		Session::flash('success', 'Not Approve Pengunduran Diri Berhasil');
+		Session::flash('success', 'Not Approve Pelatihan Berhasil');
 		return Redirect::to('hrdmanager/pelatihan');	
 	}
 

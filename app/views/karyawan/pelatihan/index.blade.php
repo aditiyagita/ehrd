@@ -42,13 +42,13 @@
 										@if( count($data['pelatihan']) > 0 ) 
 											@foreach($data['pelatihan'] as $pelatihan)
 												<?php 
-													$peserta = new Peserta();
+													$peserta = new DetailPelatihan();
 													$jmlpeserta[$i] = $peserta->cekJum($pelatihan->idpelatihan);
 												?>
 												@if($pelatihan->tanggalmulai > date('Y-m-d'))
 												<li>
 													<div class="thumbnail">
-														<img src="http://www.placehold.it/80" alt="">
+														<img src="{{Url::asset('assets/images/menu/pelatihan.png')}}" alt="">
 													</div>
 													<div class="search-info">
 														@if(($pelatihan->kuota)-count($jmlpeserta[$i]) > 0)

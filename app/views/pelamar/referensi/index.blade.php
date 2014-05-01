@@ -70,8 +70,8 @@
 											</div>
 										</div>
 										<div class="control-group" style="float:right">
-											<button type="submit" class="btn btn-primary">Save changes</button>
-											<button type="button" class="btn">Cancel</button>
+											<button type="submit" class="btn btn-brown btn-large">Save changes</button>
+											<button type="button" class="btn btn-large">Cancel</button>
 										</div>
 									{{Form::close()}}
 									<table id="detailRetur" class="table table-hover table-nomargin">

@@ -11,7 +11,7 @@ class CutiController extends BaseController {
                       )
         );
       	$this->tanda = array('');
-	    $this->title = 'Cuti';
+	    $this->title = 'Direktur JC & K - Cuti';
 	    $this->cuti = new Cuti();
 	    $this->settingcuti = new SettingCuti();
 	}

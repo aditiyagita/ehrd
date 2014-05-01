@@ -1,6 +1,6 @@
 <?php namespace Hrdstaff;
 
-use BaseController, View, Input, Redirect, Karyawan, Department, User, Jabatan, Cuti, Peserta; // Tanggal;
+use BaseController, View, Input, Redirect, Karyawan, Department, User, Jabatan, Cuti, DetailPelatihan; // Tanggal;
 
 class KaryawanController extends BaseController {
 
@@ -17,7 +17,7 @@ class KaryawanController extends BaseController {
 	    $this->jabatan 		= new Jabatan();
 	    $this->user 		= new User();
 	    $this->cuti 		= new Cuti();
-	    $this->peserta		= new Peserta();
+	    $this->peserta		= new DetailPelatihan();
 	}
 
 	public function index(){
@@ -46,6 +46,7 @@ class KaryawanController extends BaseController {
 	public function store()
 	{
 		$input 				= Input::all();
+		$input['jabatan']	= 6;
 		$input['iduser'] 	= $this->user->register($input);
 		$this->karyawan->simpan($input);
 		return Redirect::to('hrdstaff/karyawan');
@@ -102,7 +103,7 @@ class KaryawanController extends BaseController {
 		$user['tinggi_badan']	= $input['tinggi_badan'];
 		$user['status_kawin']	= $input['status_kawin'];
 		$user['agama']			= $input['agama'];
-		$user['idjabatan']		= $input['jabatan'];
+		//$user['idjabatan']		= $input['jabatan'];
 		$user['kacamata']		= $input['kacamata'];
 
 		//$karyawan['idkaryawan']			= $id;

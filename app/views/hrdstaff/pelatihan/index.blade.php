@@ -96,9 +96,13 @@
 												</td>
 												<td class='hidden-480'>
 													<center>
-														<a href="{{ Url::asset('hrdstaff/pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn" rel="tooltip" title="Detail"><i class="icon-search"></i></a>
+													@if($pelatihan->status == 3 OR $pelatihan->status == 2)
+
+													@else
 														<a href="{{ Url::asset('hrdstaff/pelatihan/'.$pelatihan->idpelatihan.'/edit') }}" class="btn btn-blue" rel="tooltip" title="Edit"><i class="icon-edit"></i></a>
 														<a href="javascript:hapusAction({{ $pelatihan->idpelatihan }})" class="btn btn-red" rel="tooltip" title="Delete"><i class="icon-remove"></i></a>
+													@endif
+														<a href="{{ Url::asset('hrdstaff/pelatihan/'.$pelatihan->idpelatihan.'') }}" class="btn" rel="tooltip" title="Detail"><i class="icon-search"></i></a>
 													</center>
 												</td>
 											</tr>

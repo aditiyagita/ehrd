@@ -111,13 +111,9 @@
 															@if($cuti->status == 0)
 																<a href="{{URL::asset('hrdmanager/approve-cuti/'.$cuti->idcuti)}}" class="btn btn-blue" rel="tooltip" title="Approve Cuti"><i class="icon-ok-sign"></i></a>
 																<a href="{{URL::asset('hrdmanager/unapprove-cuti/'.$cuti->idcuti)}}" class="btn btn-red" rel="tooltip" title="Unapprove Cuti"><i class=" icon-ban-circle"></i></a>
-															@elseif($cuti->status == 2)
-																<a href="{{URL::asset('hrdmanager/unapprove-cuti/'.$cuti->idcuti)}}" class="btn btn-red" rel="tooltip" title="Unapprove Cuti"><i class=" icon-ban-circle"></i></a>
-															@else
-																<a href="{{URL::asset('hrdmanager/approve-cuti/'.$cuti->idcuti)}}" class="btn btn-blue" rel="tooltip" title="Approve Cuti"><i class="icon-ok-sign"></i></a>
 															@endif
 														@endif														
-														<a href="{{URL::asset('hrdmanager/cuti/'.$cuti->idcuti)}}" class="btn" rel="tooltip" title="Detail Cuti"><i class="icon-ok-sign"></i></a>
+														<a href="{{URL::asset('hrdmanager/cuti/'.$cuti->idcuti)}}" class="btn" rel="tooltip" title="Detail Cuti"><i class="icon-search"></i></a>
 													</center>
 												</td>
 											</tr>

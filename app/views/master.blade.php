@@ -132,9 +132,9 @@
 	
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="{{url::asset('backend/img/favicon.ico')}}" />
+	<link rel="shortcut icon" href="{{url::asset('assets/img/favicon.ico')}}" />
 	<!-- Apple devices Homescreen icon -->
-	<link rel="apple-touch-icon-precomposed" href="{{url::asset('backend/img/apple-touch-icon-precomposed.png')}}" />
+	<link rel="apple-touch-icon-precomposed" href="{{url::asset('assets/img/apple-touch-icon-precomposed.png')}}" />
 
 </head>
 

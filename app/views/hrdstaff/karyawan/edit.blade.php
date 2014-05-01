@@ -50,25 +50,6 @@
                                         <div class="box-content nopadding" >
                                             <div class="span6"  >
                                                 <div class="control-group">
-                                                    <label for="jabatan" class="control-label">Hak Akses</label>
-                                                    <div class="controls">
-                                                        <select name="jabatan" id="jabatan" class='input-block-level' required>
-                                                            <option value="" SELECTED>-Pilih Hak Akses-</option>
-                                                            <?php $i=1;?>
-                                                            @foreach ($data['jabatan'] as $jabatan)
-                                                                @if($data['karyawan']->user->idjabatan == 7)
-                                                                
-                                                                @elseif($data['karyawan']->user->idjabatan == $jabatan->idjabatan)
-                                                                <option value="{{ $jabatan->idjabatan }}" SELECTED>{{ $jabatan->jabatan }}</option>
-                                                                @else
-                                                                <option value="{{ $jabatan->idjabatan }}">{{ $jabatan->jabatan }}</option>
-                                                                @endif
-                                                            <?php $i++ ?>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
                                                     <label for="namabank" class="control-label">Nama Bank</label>
                                                     <div class="controls">
                                                         <input type="text" name="namabank" id="namabank" placeholder="Nama Bank" value="{{ $data['karyawan']->namabank }}" class="input-block-level" required>
@@ -157,6 +138,20 @@
                                                     <label for="beratbadan" class="control-label">Berat Badan</label>
                                                     <div class="controls">
                                                         <input type="number" value="{{ $data['karyawan']->user->berat_badan }}" name="berat_badan" id="beratbadan" placeholder="Berat Badan"  class="input-block-level" min="1" max="9999" required>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label for="kacamata" class="control-label">Memakai Kacamata?</label>
+                                                    <div class="controls">
+                                                        <select name="kacamata" id="kacamata" class='input-block-level' required>
+                                                            @if($data['karyawan']->user->kacamata == 1)
+                                                                <option value="1" SELECTED>Ya</option>
+                                                                <option value="2">Tidak</option>
+                                                            @else
+                                                                <option value="1">Ya</option>
+                                                                <option value="2" SELECTED>Tidak</option>
+                                                            @endif
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,23 +253,9 @@
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label for="kacamata" class="control-label">Memakai Kacamata?</label>
-                                                    <div class="controls">
-                                                        <select name="kacamata" id="kacamata" class='input-block-level' required>
-                                                            @if($data['karyawan']->user->kacamata == 1)
-                                                                <option value="1" SELECTED>Ya</option>
-                                                                <option value="2">Tidak</option>
-                                                            @else
-                                                                <option value="1">Ya</option>
-                                                                <option value="2" SELECTED>Tidak</option>
-                                                            @endif
-                                                        </select>
-                                                    </div>
-                                                </div>
                                                 <div class="form-actions">
-                                                    <button type="submit" class="btn btn-brown btn-primary">Update Karyawan</button>
-                                                    <button type="button" class="btn">Cancel</button>
+                                                    <button type="submit" class="btn btn-brown btn-large">Update Karyawan</button>
+                                                    <button type="button" class="btn btn-large">Cancel</button>
                                                 </div>                                      
                                             </div>
                                         </div>

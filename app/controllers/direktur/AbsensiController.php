@@ -1,6 +1,6 @@
 <?php namespace Direktur;
 
-use BaseController, View, Input, Redirect, LaporanAbsensi, user, Karyawan, Auth, PDF; // Tanggal;
+use BaseController, View, Input, Redirect, ResumeAbsensi, user, Karyawan, Auth, PDF, Session; // Tanggal;
 
 class AbsensiController extends BaseController {
 
@@ -11,8 +11,8 @@ class AbsensiController extends BaseController {
                       )
         );
       	$this->tanda = array('');
-	    $this->title = 'Cuti';
-	    $this->absensi = new LaporanAbsensi();
+	    $this->title = 'Direktur JC & K - Absensi';
+	    $this->absensi = new ResumeAbsensi();
 	}
 
 	public function index(){
@@ -38,16 +38,21 @@ class AbsensiController extends BaseController {
 		$input = Input::all();
 		$data['absensi'] = $this->absensi->getLaporanAbsensi($input);
 		$bulan = array('Januari', 'Febuari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
-		$i = 1;
-		foreach ($bulan as $value) {
-			if ($i == $input['bulan']) {
-				$data['bulan'] = $value;
+		if(count($data['absensi']) > 0){
+			$i = 1;
+			foreach ($bulan as $value) {
+				if ($i == $input['bulan']) {
+					$data['bulan'] = $value;
+				}
+				$i++;
 			}
-			$i++;
+			$data['tahun'] = $input['tahun'];
+			$pdf = PDF::loadView('direktur.pdfreport.laporanabsensi', array('data' => $data))->setPaper('a4')->setOrientation('portrait');
+			return $pdf->stream('absensi-'.$data['bulan'].'/'.$input['tahun'].'.pdf');
+		}else{
+			Session::flash('warning', 'Data Absensi Belum Disetujui Manager HRD');
+        		return Redirect::back();
 		}
-		$data['tahun'] = $input['tahun'];
-		$pdf = PDF::loadView('direktur.pdfreport.laporanabsensi', array('data' => $data))->setPaper('a4')->setOrientation('portrait');
-		return $pdf->stream('absensi-'.$data['bulan'].'/'.$input['tahun'].'.pdf');
 
 	}
 

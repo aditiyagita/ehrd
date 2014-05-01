@@ -22,10 +22,10 @@ class LoginController extends BaseController {
             if (Auth::attempt($credentials, true)){
                  Session::put('user',Auth::user());
             }else{
-                return Redirect::back()->withErrors('Login Failed, Please Try Again!');
+                return Redirect::back()->withErrors('Login Gagal, Username atau Password Salah. Coba Sekali Lagi!');
             }
         }else{
-            return Redirect::back()->withErrors(['Login Failed, Username or Password Not Complete!']);
+            return Redirect::back()->withErrors('Login Gagal, Username atau Password Tidak Lengkap!');
         }
         return Redirect::to('/');
     }

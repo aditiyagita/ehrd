@@ -31,6 +31,25 @@
 						<a href="#"><i class="icon-remove"></i></a>
 					</div>
 				</div>
+				@if($cek = Session::get('success'))
+					<div class="alert alert-success" style="margin-top:15px">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Berhasil...</strong>
+                        {{ Session::get('success') }}
+                    </div>
+				@elseif($cek = Session::get('warning'))
+					<div class="alert" style="margin-top:15px">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Oopss...</strong>
+                        {{ Session::get('warning') }}
+                    </div>
+                @elseif($cek = Session::get('info'))
+					<div class="alert alert-info" style="margin-top:15px">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>Info...</strong>
+                        {{ Session::get('info') }}
+                    </div>
+				@endif
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="box">
@@ -42,9 +61,9 @@
 										<tr>
 											<th width="5%">No</th>
 											<th width="15%">Tanggal</th>
+											<th width="20%">No. Karyawan</th>
 											<th width="20%">Nama Lengkap</th>
-											<th width="40%">Alasan</th>
-											<th width="70%">Status</th>
+											<th width="20%">Status</th>
 											<th class='hidden-480 width="20%'>Operasi</th>
 										</tr>
 									</thead>
@@ -54,8 +73,8 @@
 											<tr>
 												<td><center>{{ $i }}</center></td>
 												<td>{{ date("d M Y", strtotime($pengunduran->tanggalsurat)) }}</td>
+												<td>{{ $pengunduran->karyawan->nokaryawan }}</td>
 												<td>{{ $pengunduran->karyawan->user->nama_lengkap }}</td>
-												<td>{{ $pengunduran->alasan }}</td>
 												<td>
 													@if($pengunduran->status == 2)
 														<span class="label label-satgreen">Sudah Disetujui</span>

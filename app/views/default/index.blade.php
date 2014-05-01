@@ -85,7 +85,13 @@ function checkSize(max_img_size)
 													<label for="no_passport" class="control-label">Foto</label>
 													<div class="controls">
 														<div class="fileupload fileupload-new" data-provides="fileupload">
-															<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"></div>
+															<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+																@if($data['user']->foto == null)
+																	<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image">
+																@else
+																	<img src="{{Url::asset('assets/images/user/'.$data['user']->foto)}}">
+																@endif
+															</div>
 															<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
 															<div>
 																<span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span>
@@ -246,8 +252,8 @@ function checkSize(max_img_size)
 													</div>
 												</div>
 												<div class="form-actions">
-													<button type="submit" class="btn btn-brown btn-primary" id="i_submit">Update Profile</button>
-													<button type="button" class="btn">Cancel</button>
+													<button type="submit" class="btn btn-brown btn-large" id="i_submit">Update Profile</button>
+													<button type="button" class="btn btn-large">Cancel</button>
 												</div>										
 											</div>
 										</div>
